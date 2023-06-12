@@ -324,6 +324,10 @@ return [
                     'text' => 'Usuario',
                     'url'  => 'aUsuario',
                 ],
+                [
+                    'text' => 'Lista Usuarios',
+                    'url'  => 'lUsuario',
+                ],
             ],
         ],
        

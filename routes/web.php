@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LicController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +28,25 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/pdf', [App\Http\Controllers\PdfController::class, 'index'])->name('pdf');
+
+
 /* Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia'); */
 /* Route::resource('registrarLic', LicController::class); */
 Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia');
 Route::get('visualizar', [LicController::class, 'visualizar'])->name('visualizar');
 Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic');
+
+Route::get('lUsuario', [UserController::class, 'show'])->name('show');
+
+Route::get('aUsuario', [UserController::class, 'index'])->name('index');
+Route::post('aUsuario', [UserController::class, 'create'])->name('create');
+
+/* ACTUALIZACIÓN USUARIOS */
+Route::get('editUsuario/{id}', [UserController::class, 'edit'])->name('edit');
+Route::post('updateUsuario/{id}', [UserController::class, 'update'])->name('update');
+
+/* ELIMINAR USUARIOS */
+Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('destroy');
 
 /* Route::post('/home', 'LicController@registrarLic'); */
 Auth::routes(['reglicencia' => false]);
@@ -42,6 +57,7 @@ Route::get('/fpdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
     $fpdf->Cell(50, 25, 'Hello World!');
     $fpdf->Output();
     exit;
+
 
 /* REGISTRAR USUARIOS */
 
