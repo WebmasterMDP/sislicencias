@@ -23,6 +23,7 @@ class User extends Authenticatable
         'numDocument',
         'username',
         'email',
+        'admin',
         'password',
     ];
 
