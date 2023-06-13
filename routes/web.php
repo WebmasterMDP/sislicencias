@@ -49,6 +49,7 @@ Route::post('updateUsuario/{id}', [UserController::class, 'update'])->name('upda
 Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('destroy');
 
 /* Route::post('/home', 'LicController@registrarLic'); */
+
 Auth::routes(['reglicencia' => false]);
 Route::get('/fpdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
 
@@ -57,7 +58,7 @@ Route::get('/fpdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
     $fpdf->Cell(50, 25, 'Hello World!');
     $fpdf->Output();
     exit;
-
+});
 
 /* REGISTRAR USUARIOS */
 
@@ -65,6 +66,6 @@ Route::get('/fpdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
     return view('auth.register');
 })->name('register'); */
 
-});
+
 
 

@@ -24,7 +24,6 @@ class LicController extends Controller
 
     public function visualizar(){
 
-/*         return view('licencias/visualizar'); */
         $registro = registro::orderBy('id', 'desc')
                         ->get();
 
@@ -32,13 +31,6 @@ class LicController extends Controller
     }
 
     public function registrarLic(){
-
-        /* get_date(); */
-        /* año actual */
-
-        /* return response()->json([
-            'message' => 'Registro exitoso'
-        ], 200); */
 
         /* $respuesta = $request->except('_token'); */
         /* return response()->json($respuesta); */
@@ -80,11 +72,9 @@ class LicController extends Controller
 
         $insertTicket->save();
 
-        var_dump($insertTicket);
+        /* var_dump($insertTicket); */
 
         return redirect('/home');
-
-        /* return view('licencias/reglicencia', compact('registro')); */
     }
     /**
      * Store a newly created resource in storage.

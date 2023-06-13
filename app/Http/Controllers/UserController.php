@@ -19,7 +19,9 @@ class UserController extends Controller
         $user->name = request('name');
         $user->numDocument = request('numDocument');
         $user->lastname = request('lastname');
+        $user->username = request('numDocument');
         $user->email = request('email');
+        $user->password = Hash::make(request('numDocument'));
         
         $user->save();
 
