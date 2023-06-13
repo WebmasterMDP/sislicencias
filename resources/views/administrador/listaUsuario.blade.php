@@ -47,13 +47,13 @@
                                         @foreach ($user as $users)
                                         <tr>
                                             <td>{{ $users->id }}</td>
-                                            <td>{{ $users->name }}</td>
                                             <td>{{ $users->lastname }}</td>
+                                            <td>{{ $users->name }}</td>
                                             <td>{{ $users->numDocument }}</td>
                                             <td>{{ $users->email }}</td>
                                             <td class="text-center">
                                                 <form action="{{ url('/editUsuario/'.$users->id) }}">
-                                                    <button class="btn btn-warning" name="btnEdit" id="btnEdit" type="submit">
+                                                    <button class="btn btn-warning" title="Editar" name="btnEdit" id="btnEdit" type="submit">
                                                     <i class="fas fa-edit"></i>
                                                     </button>
                                                 </form>
@@ -62,7 +62,7 @@
                                                 <form method="post" action="{{ url('/destroyUsuario/'.$users->id) }}">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="btn btn-danger" name="btnBorrar" id="btnBorrar" onclick="return confirm('¿Estas seguro que quieres borrar?')" type="submit">
+                                                    <button class="btn btn-danger" title="Borrar" name="btnBorrar" id="btnBorrar" onclick="return confirm('¿Estas seguro que quieres borrar?')" type="submit">
                                                     <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
