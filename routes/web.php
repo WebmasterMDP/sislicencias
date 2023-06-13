@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\LicController;
 use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +34,10 @@ Route::get('/pdf', [App\Http\Controllers\PdfController::class, 'index'])->name('
 
 /* Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia'); */
 /* Route::resource('registrarLic', LicController::class); */
-Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia');
-Route::get('visualizar', [LicController::class, 'visualizar'])->name('visualizar');
-Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic');
+/* Route::get('reglicencia', [LicenciaController::class, 'index'])->name('reglicencia.index');
+Route::get('visualizar', [LicenciaController::class, 'show'])->name('visualizar.show'); */
+Route::resource('licencias', LicenciaController::class);
+/* Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic'); */
 
 Route::get('lUsuario', [UserController::class, 'show'])->name('show');
 
@@ -50,21 +53,25 @@ Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('
 
 /* Route::post('/home', 'LicController@registrarLic'); */
 
-Auth::routes(['reglicencia' => false]);
-Route::get('/fpdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
-
-    $fpdf->AddPage();
-    $fpdf->SetFont('Courier', 'B', 18);
-    $fpdf->Cell(50, 25, 'Hello World!');
-    $fpdf->Output();
-    exit;
-});
+Auth::routes(['register' => false,
+/* 'reset' => false,
+'verify' => false,
+'confirm' => false,
+'logout' => false,
+'login' => true,
+'password.request' => false,
+'password.email' => false,
+'password.update' => false,
+'password.reset' => false,
+'password.confirm' => false,
+'password.confirmation' => false,
+'password.verify' => false,
+'password.confirm' => false, */
+]);
 
 /* REGISTRAR USUARIOS */
 
-/* Route::get('/register', function () {
-    return view('auth.register');
-})->name('register'); */
+
 
 
 
