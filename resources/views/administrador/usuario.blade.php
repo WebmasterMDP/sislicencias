@@ -62,16 +62,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-1">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {{-- CORREO --}}
-                                            <label for="">CORREO</label>                                       
-                                            <x-adminlte-input type="email" name="email" id="email" placeholder="Ingrese correo" label-class="text-lightblue">
+                                            {{-- ADMIN --}} 
+                                            <label for="">ADMIN</label>
+                                            <x-adminlte-input type="checkbox" name="admin" id="admin" value="admin" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
-                                                    <div class="input-group-text">
-                                                        <i class="fas fa-envelope text-dark"></i>
-                                                    </div>
+                                                    <!-- <div class="input-group-text">
+                                                        <i class="fas fa-id-card text-dark"></i>
+                                                    </div> -->
                                                 </x-slot>
                                             </x-adminlte-input>  
                                         </div>

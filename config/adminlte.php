@@ -330,7 +330,11 @@ return [
                 ],
             ],
         ],
-       
+        [
+            'text'    => 'Roles y Privilegios',
+            'icon'    => 'fas fa-user-tie',
+            'url'     => 'r&p',
+        ],
     ],
 
     /*
