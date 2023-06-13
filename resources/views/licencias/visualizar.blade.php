@@ -35,7 +35,8 @@
                                 <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
                                     <thead class="text-center text-nowrap bg-info ">
                                         <tr>
-                                            <th>LICENCIA</th>
+                                            <th>N°</th>
+                                            <th>COD. LICENCIA</th>
                                             <th>PERIODO</th>
                                             <th>VIGENCIA</th>
                                             <th>NATURAL / JURIDICA</th>
@@ -70,40 +71,41 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($registro as $registros)
+                                        @foreach ($showRegistros as $showRegistro)
                                         <tr>
-                                            <td>{{ $registros->id }}</td>
-                                            <td>{{ $registros->periodo }}</td>
-                                            <td>{{ $registros->vigencia }}</td>
-                                            <td>{{ $registros->natJurid }}</td>
-                                            <td>{{ $registros->asunto }}</td>
-                                            <td>{{ $registros->expediente }}</td>
-                                            <td>{{ $registros->fechaExped }}</td>
-                                            <td>{{ $registros->resolucion }}</td>
-                                            <td>{{ $registros->apeNombre }}</td>
-                                            <td>{{ $registros->ruc }}</td>
-                                            <td>{{ $registros->telefono }}</td>
-                                            <td>{{ $registros->dni }}</td>
-                                            <td>{{ $registros->repLegal }}</td>
-                                            <td>{{ $registros->dniRepLegal }}</td>
-                                            <td>{{ $registros->dirEstable }}</td>
-                                            <td>{{ $registros->numero }}</td>
-                                            <td>{{ $registros->int }}</td>
-                                            <td>{{ $registros->manzana }}</td>
-                                            <td>{{ $registros->lote }}</td>
-                                            <td>{{ $registros->cSect }}</td>
-                                            <td>{{ $registros->sector }}</td>
-                                            <td>{{ $registros->zona }}</td>
-                                            <td>{{ $registros->giroEstable }}</td>
-                                            <td>{{ $registros->estable }}</td>
-                                            <td>{{ $registros->nivelRiesgo }}</td>
-                                            <td>{{ $registros->area }}</td>
-                                            <td>{{ $registros->observacion }}</td>
-                                            <td>{{ $registros->zonificacion }}</td>
-                                            <td>{{ $registros->nomComercial }}</td>
-                                            <td>{{ $registros->reciboPago }}</td>
-                                            <td>{{ $registros->fechaPago }}</td>
-                                            <td>{{ $registros->importe }}</td>
+                                            <td>{{ $showRegistro->id }}</td>
+                                            <td>{{ $showRegistro->codLicencia }}</td>
+                                            <td>{{ $showRegistro->periodo }}</td>
+                                            <td>{{ $showRegistro->vigencia }}</td>
+                                            <td>{{ $showRegistro->natJurid }}</td>
+                                            <td>{{ $showRegistro->asunto }}</td>
+                                            <td>{{ $showRegistro->expediente }}</td>
+                                            <td>{{ $showRegistro->fechaExped }}</td>
+                                            <td>{{ $showRegistro->resolucion }}</td>
+                                            <td>{{ $showRegistro->apeNombre }}</td>
+                                            <td>{{ $showRegistro->ruc }}</td>
+                                            <td>{{ $showRegistro->telefono }}</td>
+                                            <td>{{ $showRegistro->dni }}</td>
+                                            <td>{{ $showRegistro->repLegal }}</td>
+                                            <td>{{ $showRegistro->dniRepLegal }}</td>
+                                            <td>{{ $showRegistro->dirEstable }}</td>
+                                            <td>{{ $showRegistro->numero }}</td>
+                                            <td>{{ $showRegistro->int }}</td>
+                                            <td>{{ $showRegistro->manzana }}</td>
+                                            <td>{{ $showRegistro->lote }}</td>
+                                            <td>{{ $showRegistro->cSect }}</td>
+                                            <td>{{ $showRegistro->sector }}</td>
+                                            <td>{{ $showRegistro->zona }}</td>
+                                            <td>{{ $showRegistro->giroEstable }}</td>
+                                            <td>{{ $showRegistro->estable }}</td>
+                                            <td>{{ $showRegistro->nivelRiesgo }}</td>
+                                            <td>{{ $showRegistro->area }}</td>
+                                            <td>{{ $showRegistro->observacion }}</td>
+                                            <td>{{ $showRegistro->zonificacion }}</td>
+                                            <td>{{ $showRegistro->nomComercial }}</td>
+                                            <td>{{ $showRegistro->reciboPago }}</td>
+                                            <td>{{ $showRegistro->fechaPago }}</td>
+                                            <td>{{ $showRegistro->importe }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

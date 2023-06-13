@@ -11,7 +11,7 @@ use App\Models\Giro;
 class LicController extends Controller
 {
     
-    public function index(){
+    /* public function index(){
 
         $sector = sector::orderBy('nombre', 'asc')
                     ->get();
@@ -20,15 +20,15 @@ class LicController extends Controller
                     ->get();
         
         return view('licencias/reglicencia', compact('sector','giro'));
-    }
+    } */
 
-    public function visualizar(){
+    /* public function visualizar(){
 
         $registro = registro::orderBy('id', 'desc')
                         ->get();
 
         return view('licencias/visualizar', compact('registro'));
-    }
+    } */
 
     public function registrarLic(){
 

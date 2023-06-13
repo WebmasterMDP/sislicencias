@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <form action="registrarlicencia" method="POST" autocomplete="off">
+                    <form action="{{ route('licencias.store')}}" method="POST" autocomplete="off">
                         @csrf
                         <div class="card-body">                                
                             <div class="row "> 
@@ -344,8 +344,8 @@
                                                                     <i class="fas fa-id-card text-dark"></i>
                                                                 </div>
                                                             </x-slot>
-                                                            @foreach ($sector as $sectors)
-                                                            <option>{{ $sectors->nombre }}</option>
+                                                            @foreach ($sectors as $sector)
+                                                            <option>{{ $sector->nombre }}</option>
                                                             @endforeach
                                                         </x-adminlte-select>
                                                     </div>
@@ -392,8 +392,8 @@
                                                                     <i class="fas fa-id-card text-dark"></i>
                                                                 </div>
                                                             </x-slot>
-                                                            @foreach ($giro as $giros)
-                                                            <option>{{ $giros->nombre }}</option>
+                                                            @foreach ($giros as $giro)
+                                                            <option>{{ $giro->nombre }}</option>
                                                             @endforeach
                                                         </x-adminlte-select>
                                                     </div>
@@ -522,7 +522,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-primary" name="btnBuscar" id="btnBuscar" type="submit">
+                                    <button class="btn btn-primary" name="btnRegistrar" id="btnRegistrar" type="submit">
                                         <i class="fas fa-upload"></i>
                                         Registrar
                                     </button>                                                                       
