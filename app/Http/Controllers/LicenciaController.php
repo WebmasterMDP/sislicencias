@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Licencia;
 use Illuminate\Http\Request;
+use App\Models\Registro;
+use App\Models\Sector;
+use App\Models\Giro;
 
 class LicenciaController extends Controller
 {
@@ -14,7 +17,10 @@ class LicenciaController extends Controller
      */
     public function index()
     {
-        //
+        $sectors = Sector::orderBy('nombre', 'asc')->get();
+        $giros = Giro::orderBy('nombre', 'asc')->get();
+        
+        return view('licencias/reglicencia', compact('sectors','giros'));
     }
 
     /**
@@ -35,7 +41,37 @@ class LicenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datosLicencia = $request->except('_token', 'btnRegistrar');
+        try {                    
+
+            $consultaCodigoAnt = Licencia::select('id','periodo')
+                                            /* ->where('periodo', date('Y')) */
+                                            ->orderBy('id', 'desc')
+                                            ->first();
+
+            $codLicencia = array('codLicencia' => '000'.$consultaCodigoAnt->id+(1).'-'.$consultaCodigoAnt->periodo,
+                                'periodo' => date('Y'));
+            
+
+            $registroLicencia = array_merge($codLicencia, $datosLicencia);
+            Licencia::insert($registroLicencia);
+            
+            return response()->json($registroLicencia);
+        } catch (\Throwable $th) {
+            $codLicencia = array('codLicencia' => '0001-'.date('Y'),
+                             'periodo' => date('Y'));        
+
+            $registroLicencia = array_merge($codLicencia, $datosLicencia);
+            Licencia::insert($registroLicencia);
+        }
+        
+
+
+        /* $codLicencia = array('codLicencia' => '0001-'.date('Y'),
+                             'periodo' => date('Y'));        
+
+            $registroLicencia = array_merge($codLicencia, $datosLicencia);
+            Licencia::insert($registroLicencia); */
     }
 
     /**
@@ -44,9 +80,11 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function show(Licencia $licencia)
+    public function show(/* Licencia $licencia */)
     {
-        //
+        $showRegistros = Licencia::orderBy('id', 'desc')->get();
+
+        return view('licencias/visualizar', compact('showRegistros'));
     }
 
     /**

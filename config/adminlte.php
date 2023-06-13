@@ -264,7 +264,7 @@ return [
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => null,
+    'register_url' => false,
     'password_reset_url' => null,
     'password_email_url' => null,
     'profile_url' => false,
@@ -307,11 +307,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Registrar',
-                    'url'  => 'reglicencia',
+                    'url'  => 'licencias',
                 ],
                 [
                     'text' => 'Visualizar',
-                    'url'  => 'visualizar',
+                    'url' => 'licencias/show',                    
                 ],
             ],
         ],
