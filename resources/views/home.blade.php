@@ -14,7 +14,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    
                     <div class="card-body">
                         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
@@ -77,8 +76,9 @@
                                                         <div class="icon">
                                                             <i class="ion ion-pie-graph"></i>
                                                         </div>
-                                                        <a href="#" class="small-box-footer">More info <i
-                                                                class="fas fa-arrow-circle-right"></i></a>
+                                                        <a href="#" class="small-box-footer">More info 
+                                                            <i class="fas fa-arrow-circle-right"></i>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
