@@ -306,12 +306,18 @@ return [
             'icon'    => 'fas fa-certificate',
             'submenu' => [
                 [
-                    'text' => 'Registrar',
+                    'text' => 'Registrar Licencia',
                     'url'  => 'licencias',
+                    'icon' => 'fas fa-fw fa-certificate',
                 ],
                 [
-                    'text' => 'Visualizar',
+                    'text' => 'Ver Licencias',
                     'url' => 'licencias/show',                    
+                ],
+                [
+                    'text' => 'Anulaciones',
+                    'url' => 'licencias/ban',  
+                    'icon' => 'fas fa-fw fa-ban',                  
                 ],
             ],
         ],

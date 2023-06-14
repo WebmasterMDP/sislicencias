@@ -32,6 +32,15 @@
                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12">
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        <strong>{{ session('success') }}</strong>
+                                    </div>
+                                @elseif (session('error'))
+                                    <div class="alert alert-danger">
+                                        <strong>{{ session('error') }}</strong>
+                                    </div>
+                                @endif
                                 <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
                                     <thead class="text-center text-nowrap bg-info ">
                                         <tr>
@@ -68,6 +77,8 @@
                                             <th>RECIBO DE PAGO</th>
                                             <th>FECHA DE PAGO</th>
                                             <th>IMPORTE</th>
+                                            <th>ESTADO</th>
+                                            <th>ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -106,6 +117,38 @@
                                             <td>{{ $showRegistro->reciboPago }}</td>
                                             <td>{{ $showRegistro->fechaPago }}</td>
                                             <td>{{ $showRegistro->importe }}</td>
+                                            @if ($showRegistro->estado == 1)
+                                            <td><span class="badge bg-success">Activo</span></td>
+                                            @else
+                                            <td><span class="badge bg-danger">Anulado</span></td>
+                                            @endif
+                                            <td> <br>
+                                                @if ($showRegistro->print != 1)                                                
+                                                    <a href="" class="btn btn-info" data-toggle="tooltip"  data-placement="top" title="Imprimir">
+                                                        <span class="fas fa-print"></span>
+                                                    </a>                                                
+                                                @endif
+                                                 
+                                                <a href="" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modificar registro">
+                                                    <span class='fas fa-edit'></span>
+                                                </a>                                                                                                
+                                                {{-- @if (/* Route::has('licencias') */$showRegistro->estado == 1) --}}                                                
+                                                <a href="#" data-href="{{ url('licencias/'.$showRegistro->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Anular registro">
+                                                    <span class="fas fa-ban"></span>
+                                                </a>                                                
+                                                {{-- @endif --}}
+
+                                                {{-- @if ($showRegistro->estado == 1)
+                                                <a href="#" data-href="{{ route('licencias.destroy') }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Anular registro">
+                                                    <span class="fas fa-ban"></span>
+                                                </a>
+                                                @else
+                                                <a href="#" data-href="{{ route('licencias.destroy') }}" class="btn btn-success" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Activar registro">
+                                                    <span class="fas fa-check"></span>
+                                                </a>
+                                                @endif --}}                                                                                                
+                                            </td>
+                                            
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -117,13 +160,63 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Anular Licencia</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Desea anular este registro?</p>
+                </div>
+                <div class="modal-footer">
+                    {{-- <a class="btn btn-light" data-dismiss="modal">Cancelar</a> --}}
+                    <a class="btn btn-light" data-dismiss="modal">No</a>
+                    <form id="anulaRegistro" name="anulaRegistro"  action="#" method="POST" >   
+                        @csrf
+                        @method('DELETE') 
+                            {{-- <button type="submit" class="btn btn-danger">Si</button> --}}                        
+                        <a class="btn btn-danger btn-ok">Si</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
 </x-adminlte-card>
 
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="http://localhost/siscertificado/vendor/almasaeed2010/adminlte/dist/css/adminlte.css">
+    {{-- <link rel="stylesheet" href="http://localhost/siscertificado/vendor/almasaeed2010/adminlte/dist/css/adminlte.css"> --}}
 @stop
 
 @section('js')
+<script>
+        
+    $('#confirm-delete').on('show.bs.modal', function(e) {
+        anulaRegistro.setAttribute('action', $(e.relatedTarget).data('href'));        
+           
+        $('.btn-ok').on('click', function(e) {
+            anulaRegistro.submit();            
+        });
+
+       
+
+        // if(confirm == true){
+        //     e.preventDefault();
+        //     document.getElementById('anulaRegistro').submit();
+        //    /*  window.location.href = $(e.relatedTarget).data('href'); */
+        // }
+        /* $(this).find('#anulaRegistro').attr('href', $(e.relatedTarget).data('href')); */
+        // document.getElementById('anulaRegistro').submit()
+        /* $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>'); */
+    });
+</script>
 @stop
