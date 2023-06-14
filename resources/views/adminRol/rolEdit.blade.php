@@ -62,32 +62,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label>
+                                @foreach ($roles as $rol)
+                                <div class="col-md-1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{-- VNC --}} 
+                                            <label for="">{{ $rol->name }}</label>
+                                            <x-adminlte-input type="checkbox" name="rol" id="rol" value="{{ $rol->id }}" placeholder="Ingrese IP" label-class="text-lightblue">
+                                                <x-slot name="prependSlot">
+                                                </x-slot>
+                                            </x-adminlte-input>  
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                                <!-- <label>
                                     @foreach ($roles as $rol)
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" name="" id="" value="{{ $rol->id }}" checked>
+                                        <input type="checkbox" class="form-check-input" name="roles" id="roles" value="{{ $rol->id }}" checked>
                                         {{ $rol->name }}
                                         </label>
                                     </div>
                                     @endforeach
-                                </label>
-                                <!-- <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            {{-- LISTADO DE ROLES --}} 
-                                            <label for="">LISTADO DE ROLES</label>                                      
-                                            <x-adminlte-input type="text" name="roles" id="roles" label-class="text-lightblue">
-                                                <x-slot name="prependSlot">
-                                                    <div class="input-group-text">
-                                                        <i class="fas fa-user-lock text-dark"></i>
-                                                    </div>
-                                                </x-slot>
-                                                
-                                            </x-adminlte-input>  
-                                        </div>
-                                    </div>
-                                </div> -->
+                                </label> -->
                             </div>
                         </div>
                         <div class="col-md-12">

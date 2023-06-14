@@ -37,12 +37,12 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($users as $user)
+                                                        @foreach ($alls as $all)
                                                         <tr>
-                                                            <td>{{ $user->name }}</td>
-                                                            <td>{{ $user->email }}</td>
+                                                            <td>{{ $all->name }}</td>
+                                                            <td>{{ $all->email }}</td>
                                                             <td class="text-center">
-                                                                <form action="{{ url('/rolEdit/'.$user->id) }}">
+                                                                <form action="{{ url('/rolEdit/'.$all->id) }}">
                                                                     <button class="btn btn-warning" title="Editar" name="btnEdit" id="btnEdit" type="submit">
                                                                     <i class="fas fa-edit"></i>
                                                                     </button>
