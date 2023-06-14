@@ -25,18 +25,37 @@
                             <section class="content">
                                 <div class="container-fluid">
                                     <div class="row" style="text-align:center">
-                                        <div class="col-md-3">
-                                            <a style=" text-align: center; vertical-align: middle;" data-toggle="modal" type="button" class="btn btn-block btn-outline-secondary btn-lg" href="#modal1">
-                                                <span class="badge bg-purple"></span>
-                                                <i class="fas fa-users fa-5x"></i> Usuarios
-                                            </a>
+                                        
+                                        <div class="col-md-6">
+                                            <!-- <div class="card"> -->
+                                                <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+                                                    <thead class="text-center text-nowrap bg-info ">
+                                                        <tr>
+                                                            <th>NOMBRES</th>
+                                                            <th>CORREO</th>
+                                                            <th>ASIGNAR ROL</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($users as $user)
+                                                        <tr>
+                                                            <td>{{ $user->name }}</td>
+                                                            <td>{{ $user->email }}</td>
+                                                            <td class="text-center">
+                                                                <form action="{{ url('/rolEdit/'.$user->id) }}">
+                                                                    <button class="btn btn-warning" title="Editar" name="btnEdit" id="btnEdit" type="submit">
+                                                                    <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            <!-- </div> -->
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="card">
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 " style="text-align:center">
+
+                                        <div class="col-md-3" style="text-align:center">
                                             <a style="text-align: center; vertical-align: middle;" data-toggle="modal" type="button" class="btn btn-block btn-outline-dark btn-lg" href="#modal2">
                                                 <span class="badge bg-purple"></span>
                                                 <i class="fas fa-user-secret fa-5x"></i> Administradores
@@ -45,6 +64,12 @@
                                                 <span class="badge bg-purple"></span>
                                                 <i class="fas fa-user-secret fa-8x"></i> Administradores
                                             </button> -->
+                                        </div>
+                                        <div class="col-md-3">
+                                            <a style=" text-align: center; vertical-align: middle;" data-toggle="modal" type="button" class="btn btn-block btn-outline-secondary btn-lg" href="#modal1">
+                                                <span class="badge bg-purple"></span>
+                                                <i class="fas fa-users fa-5x"></i> Usuarios
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +93,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-            <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+                <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
                     <thead class="text-center text-nowrap bg-info ">
                         <tr>
                             <th>NOMBRES</th>

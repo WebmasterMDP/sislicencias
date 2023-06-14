@@ -29,15 +29,9 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Home.home');
 Route::get('/pdf', [App\Http\Controllers\PdfController::class, 'index'])->name('pdf');
 
-<<<<<<< HEAD
-/* LICENCIAS */
-Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia');
-Route::get('visualizar', [LicController::class, 'visualizar'])->name('visualizar');
-Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic');
-=======
 
 /* Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia'); */
 /* Route::resource('registrarLic', LicController::class); */
@@ -45,33 +39,24 @@ Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('
 Route::get('visualizar', [LicenciaController::class, 'show'])->name('visualizar.show'); */
 Route::resource('licencias', LicenciaController::class);
 /* Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic'); */
->>>>>>> 3053d1bd3868a7ccca41beeebcb5fa245d41391b
 
-/* ROLES Y PRIVILEGIOS */
-Route::get('r&p', [RolController::class, 'index'])->name('index');
 
 /* LISTA USUARIOS */
-Route::get('lUsuario', [UserController::class, 'show'])->name('show');
+Route::get('lUsuario', [UserController::class, 'show'])->name('User.show');
 /* AGREGAR USUARIOS */
-Route::get('aUsuario', [UserController::class, 'index'])->name('index');
-Route::post('aUsuario', [UserController::class, 'create'])->name('create');
+Route::get('aUsuario', [UserController::class, 'index'])->name('User.index');
+Route::post('aUsuario', [UserController::class, 'create'])->name('User.create');
 /* ACTUALIZACIÓN USUARIOS */
-Route::get('editUsuario/{id}', [UserController::class, 'edit'])->name('edit');
-Route::post('updateUsuario/{id}', [UserController::class, 'update'])->name('update');
+Route::get('editUsuario/{id}', [UserController::class, 'edit'])->name('User.edit');
+Route::post('updateUsuario/{id}', [UserController::class, 'update'])->name('User.update');
 /* ELIMINAR USUARIOS */
-Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('destroy');
+Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('User.destroy');
 
-<<<<<<< HEAD
-Auth::routes(['reglicencia' => false]);
-Route::get('/fpdf', function (Codedge\Fpdf\Fpdf\Fpdf $fpdf) {
+/* ROLES Y PRIVILEGIOS */
+Route::get('r&p', [RolController::class, 'index'])->name('Role.index');
+Route::get('rolEdit/{id}', [RolController::class, 'edit'])->name('Role.edit');
+Route::post('rolUpdate/{id}', [RolController::class, 'update'])->name('Role.update');
 
-    $fpdf->AddPage();
-    $fpdf->SetFont('Courier', 'B', 18);
-    $fpdf->Cell(50, 25, 'Hello World!');
-    $fpdf->Output();
-    exit;
-});
-=======
 /* Route::post('/home', 'LicController@registrarLic'); */
 
 Auth::routes(['register' => false,
@@ -89,7 +74,6 @@ Auth::routes(['register' => false,
 'password.verify' => false,
 'password.confirm' => false, */
 ]);
->>>>>>> 3053d1bd3868a7ccca41beeebcb5fa245d41391b
 
 /* REGISTRAR USUARIOS */
 

@@ -304,14 +304,17 @@ return [
         [
             'text'    => 'Modulo de Licencias',
             'icon'    => 'fas fa-certificate',
+            'can'     => 'licencias.index',
             'submenu' => [
                 [
                     'text' => 'Registrar',
                     'url'  => 'licencias',
+                    'can'  => 'licencias.index',
                 ],
                 [
                     'text' => 'Visualizar',
-                    'url' => 'licencias/show',                    
+                    'url' => 'licencias/show',                   
+                    'can' => 'licencias.show',                   
                 ],
             ],
         ],
@@ -319,21 +322,26 @@ return [
         [
             'text'    => 'Administrador',
             'icon'    => 'fas fa-user-tie',
+            'can'     => 'User.index',
             'submenu' => [
                 [
                     'text' => 'Usuario',
                     'url'  => 'aUsuario',
+                    'can'  => 'User.index',
                 ],
                 [
                     'text' => 'Lista Usuarios',
                     'url'  => 'lUsuario',
+                    'can'  => 'User.show',
                 ],
             ],
         ],
+
         [
             'text'    => 'Roles y Privilegios',
             'icon'    => 'fas fa-user-tie',
             'url'     => 'r&p',
+            'can'     => 'Role.index',
         ],
     ],
 
