@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
         $roleAdmin = Role::create(['name' => 'Admin']);
         $roleUser = Role::create(['name' => 'Usuario']);
 
-        $permission = Permission::create(['name' => 'Home.home'])->syncRoles([$roleAdmin, $roleUser]);
+        /* $permission = Permission::create(['name' => 'Home.home'])->syncRoles([$roleAdmin, $roleUser]); */
 
         $permission = Permission::create(['name' => 'Role.index'])->syncRoles([$roleAdmin]);
         $permission = Permission::create(['name' => 'Role.edit'])->syncRoles([$roleAdmin]);
@@ -30,11 +30,11 @@ class RoleSeeder extends Seeder
         $permission = Permission::create(['name' => 'licencias.edit'])->syncRoles([$roleAdmin, $roleUser]);
         $permission = Permission::create(['name' => 'licencias.update'])->syncRoles([$roleAdmin, $roleUser]);
         
-        $permission = Permission::create(['name' => 'User.index'])->syncRoles([$roleAdmin, $roleUser]);
-        $permission = Permission::create(['name' => 'User.show'])->syncRoles([$roleAdmin, $roleUser]);
-        $permission = Permission::create(['name' => 'User.create'])->syncRoles([$roleAdmin, $roleUser]);
-        $permission = Permission::create(['name' => 'User.edit'])->syncRoles([$roleAdmin, $roleUser]);
-        $permission = Permission::create(['name' => 'User.update'])->syncRoles([$roleAdmin, $roleUser]);
-        $permission = Permission::create(['name' => 'User.destroy'])->syncRoles([$roleAdmin, $roleUser]);
+        $permission = Permission::create(['name' => 'User.index'])->syncRoles([$roleAdmin]);
+        $permission = Permission::create(['name' => 'User.show'])->syncRoles([$roleAdmin]);
+        $permission = Permission::create(['name' => 'User.create'])->syncRoles([$roleAdmin]);
+        $permission = Permission::create(['name' => 'User.edit'])->syncRoles([$roleAdmin]);
+        $permission = Permission::create(['name' => 'User.update'])->syncRoles([$roleAdmin]);
+        $permission = Permission::create(['name' => 'User.destroy'])->syncRoles([$roleAdmin]);
     }
 }

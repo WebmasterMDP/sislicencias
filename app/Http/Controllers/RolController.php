@@ -10,14 +10,15 @@ class RolController extends Controller
 {
     public function index(User $user)
     {
+        $alls = $user->get();
 
-        $users = $user->where('admin', null)
+        $users = $user->where('rol', '=', '2')
                         ->get();
                         
-        $admins = $user->where('admin', '=', 'admin')
+        $admins = $user->where('rol', '=', '1')
                         ->get();
 
-        return view('adminRol/rolIndex', compact('users','admins'));
+        return view('adminRol/rolIndex', compact('users', 'admins', 'alls'));
     }
 
     public function edit($id)
@@ -30,7 +31,13 @@ class RolController extends Controller
     
     public function update(Request $request, User $user, $id)
     {
-        $user->roles()->sync($request->roles);
+        $datosUser = $request->except(['_token','_method']);
+        User::where('id',$id)->update($datosUser);
+
+        $user = User::findOrFail($id);
+        /* $user->where('rol','=',$request->roles)->update(); */
+        $user->roles()->sync($request->rol);
+        
         return redirect('r&p');
     }
 }
