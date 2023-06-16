@@ -1,15 +1,23 @@
 <?php
 
 use Codedge\Fpdf\Fpdf\Fpdf;
-use Codedge\Fpdf\Fpdf\MultiCellBlt;
-
-/* require('.php'); */
-use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 
 class PDF extends FPDF
 {
     function Header()
     {
+        /* $renderer = new ImageRenderer(
+            new RendererStyle(400),
+            new ImagickImageBackEnd()
+        );
+        $writer = new Writer($renderer); */
+        /* $writer->writeFile('Hello World!', 'qrcode.png'); */
+        
         // Logo
         $this->Image('vendor/adminlte/dist/img/escudo.png',10,8,33);
         /* $this->Image('vendor/adminlte/dist/img/escudo.png',10,8,30); */
@@ -76,7 +84,6 @@ class PDF extends FPDF
         $this->Cell(0, 10, utf8_decode('ESTE CERTIFICADO DEBE EXHIBIRSE OBLIGATORIAMENTE EN UN LUGAR VISIBLE'),0,0,'C');
     }
 }
-
 $pdf = new PDF();
 
 $pdf->AliasNbPages();
