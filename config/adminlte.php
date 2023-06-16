@@ -316,7 +316,7 @@ return [
                 ],
                 [
                     'text' => 'Anulaciones',
-                    'url' => 'licencias/ban',  
+                    'url' => 'licencias/anulaciones',  
                     'icon' => 'fas fa-fw fa-ban',                  
                 ],
             ],

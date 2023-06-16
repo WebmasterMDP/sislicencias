@@ -28,6 +28,14 @@ class LicenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function annulations()
+    {
+        $licenciasAnuladas = Licencia::select('*')
+                                     ->where(['estado' => '0'])
+                                     ->orderBy('id', 'desc')
+                                     ->get();
+        return view('licencias/anulaciones', compact('licenciasAnuladas'));
+    }
     public function create()
     {
         //
@@ -95,7 +103,10 @@ class LicenciaController extends Controller
      */
     public function show(/* Licencia $licencia */)
     {
-        $showRegistros = Licencia::orderBy('id', 'desc')->get();
+        $showRegistros = Licencia::select('*')
+                                 ->where(['estado'=>'1'])
+                                 ->orderBy('id', 'desc')
+                                 ->get();
 
         return view('licencias/visualizar', compact('showRegistros'));
     }
@@ -132,13 +143,37 @@ class LicenciaController extends Controller
     public function destroy($id/* Licencia $licencia */)
     {
         
-        try {
+        /* try {
             $eliminarLicencia = Licencia::findOrFail($id);
             $eliminarLicencia->delete();
             return redirect('licencias/show')->with('success', 'Licencia anulada correctamente');
         } catch (\Throwable $th) {
             return redirect('licencias/show')->with('error', 'Error al anular la licencia, contácte con la Oficina de Gobierno Digital'); 
+        } */
+        try {
+            $cancelLicencia = Licencia::findOrFail($id);
+            $cancelLicencia->update(['estado' => 0]);
+            return redirect('licencias/show')->with('success', 'Licencia anulada correctamente');
+        } catch (\Throwable $th) {
+            return redirect('licencias/show')->with('error', 'Error al anular la licencia, contácte con la Oficina de Gobierno Digital'); 
         }
         
+    } 
+    
+    /* public function getLicencia($id)
+    {
+        $licencia = Licencia::select('*')
+                            ->where(['id' => $id])
+                            ->first();
+        return response()->json($licencia);
+    } */
+
+    public function fpdfLicencia($id)
+    {
+        $showDatosLicencia = Licencia::select('*')
+                            ->where(['id' => $id])
+                            ->first();
+        return view('pdf/pdf', compact('showDatosLicencia'));
     }
+    
 }

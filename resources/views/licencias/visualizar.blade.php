@@ -42,7 +42,7 @@
                                     </div>
                                 @endif
                                 <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
-                                    <thead class="text-center text-nowrap bg-info ">
+                                    <thead class="text-center text-nowrap bg-dark">
                                         <tr>
                                             <th>N°</th>
                                             <th>COD. LICENCIA</th>
@@ -123,19 +123,33 @@
                                             <td><span class="badge bg-danger">Anulado</span></td>
                                             @endif
                                             <td> <br>
-                                                @if ($showRegistro->print != 1)                                                
-                                                    <a href="" class="btn btn-info" data-toggle="tooltip"  data-placement="top" title="Imprimir">
+                                                @if ($showRegistro->print == 1 || $showRegistro->estado != 1) 
+                                                    {{-- <a href="{{ url('licencias/'.$showRegistro->id) }}" class="btn btn-info" data-toggle="tooltip"  data-placement="top" title="Imprimir">
                                                         <span class="fas fa-print"></span>
-                                                    </a>                                                
+                                                    </a> --}}  
+                                                    <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
+                                                        <span class="fas fa-print"></span>
+                                                    </button>
+                                                    <button href="#" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Modificar registro">
+                                                        <span class='fas fa-edit'></span>
+                                                    </button>                        
+                                                    <button href="#" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Anular registro">
+                                                        <span class="fas fa-ban"></span> 
+                                                    </button>                                           
+                                                @else
+                                                    <a href="#" data-href="{{ url('licencias/fpdf/'.$showRegistro->id) }}" class="btn btn-info btn-print" data-toggle="modal" data-target="#modalLicencia" data-placement="top"  title="Imprimir">
+                                                        <span class="fas fa-print"></span>
+                                                    </a>
+                                                    <a href="" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modificar registro">
+                                                        <span class='fas fa-edit'></span>
+                                                    </a>                                                                                                
+                                                    {{-- @if (/* Route::has('licencias') */$showRegistro->estado == 1) --}}                                                
+                                                    <a href="#" data-href="{{ url('licencias/'.$showRegistro->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Anular registro">
+                                                        <span class="fas fa-ban"></span>
+                                                    </a>                                                   
                                                 @endif
                                                  
-                                                <a href="" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modificar registro">
-                                                    <span class='fas fa-edit'></span>
-                                                </a>                                                                                                
-                                                {{-- @if (/* Route::has('licencias') */$showRegistro->estado == 1) --}}                                                
-                                                <a href="#" data-href="{{ url('licencias/'.$showRegistro->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Anular registro">
-                                                    <span class="fas fa-ban"></span>
-                                                </a>                                                
+                                                                                                
                                                 {{-- @endif --}}
 
                                                 {{-- @if ($showRegistro->estado == 1)
@@ -188,6 +202,19 @@
         </div>
     </div>
 
+    <x-adminlte-modal id="modalLicencia" title="Vista Previa de Licencia" size="lg" theme="dark"
+    icon="fas fa-eye">
+    <div class="modal-body">
+        <iframe id="frameLicencia" src="" width="100%" height="500px"></iframe>
+    </div>
+    
+    {{-- <img class="img-fluid" src="" alt=""> --}}
+    {{-- <x-slot name="footerSlot">
+        <x-adminlte-button class="mr-auto" theme="success" label="Accept"/>
+        <x-adminlte-button theme="danger" label="Dismiss" data-dismiss="modal"/>
+    </x-slot> --}}
+    </x-adminlte-modal>
+
     
 </x-adminlte-card>
 
@@ -217,6 +244,18 @@
         /* $(this).find('#anulaRegistro').attr('href', $(e.relatedTarget).data('href')); */
         // document.getElementById('anulaRegistro').submit()
         /* $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>'); */
+    });
+    $('#modalLicencia').on('show.bs.modal', function(e) {
+        $('#frameLicencia').attr('src', $(e.relatedTarget).data('href'));
+        $('.btn btn-info btn-print').attr('disabled', false);
+        
+            /* $('#frameLicencia').attr('src', 'http://localhost/siscertificado/public/licencias/fpdf/1'); */
+        
+       
+           /*  $('#frameLicencia').attr('src', $(e.relatedTarget).data('href')); */
+            /* $('#frameLicencia').get(0).contentWindow.print(); abre el print directamente*/
+       
+
     });
 </script>
 @stop
