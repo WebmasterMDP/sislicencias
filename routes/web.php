@@ -5,6 +5,7 @@ use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\LicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\PdfController;
 
 
 /*
@@ -30,7 +31,7 @@ Route::get('/', function () {
 })->name('login');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Home.home');
-Route::get('/pdf', [App\Http\Controllers\PdfController::class, 'index'])->name('pdf');
+Route::get('/licencias/pdf/{id}', [PdfController::class, 'index'])->name('pdf');
 
 
 /* Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia'); */
@@ -39,7 +40,6 @@ Route::get('/pdf', [App\Http\Controllers\PdfController::class, 'index'])->name('
 Route::get('visualizar', [LicenciaController::class, 'show'])->name('visualizar.show'); */
 Route::resource('licencias', LicenciaController::class);
 /* Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic'); */
-
 
 /* LISTA USUARIOS */
 Route::get('lUsuario', [UserController::class, 'show'])->name('User.show');
