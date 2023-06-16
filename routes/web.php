@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +38,11 @@ Route::get('/pdf', [App\Http\Controllers\PdfController::class, 'index'])->name('
 /* Route::resource('registrarLic', LicController::class); */
 /* Route::get('reglicencia', [LicenciaController::class, 'index'])->name('reglicencia.index');
 Route::get('visualizar', [LicenciaController::class, 'show'])->name('visualizar.show'); */
+Route::get('licencias/anulaciones', [LicenciaController::class, 'annulations'])->name('anulaciones');
+Route::get('licencias/fpdf/{id}', [LicenciaController::class, 'fpdfLicencia'])->name('fpdfLicencia');
+Route::get('licencias/print/{id}', [LicenciaController::class, 'anulacionPrint'])->name('print');
 Route::resource('licencias', LicenciaController::class);
+
 /* Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic'); */
 
 

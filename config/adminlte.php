@@ -307,14 +307,18 @@ return [
             'can'     => 'licencias.index',
             'submenu' => [
                 [
-                    'text' => 'Registrar',
+                    'text' => 'Registrar Licencia',
                     'url'  => 'licencias',
-                    'can'  => 'licencias.index',
+                    'icon' => 'fas fa-fw fa-certificate',
                 ],
                 [
-                    'text' => 'Visualizar',
-                    'url' => 'licencias/show',                   
-                    'can' => 'licencias.show',                   
+                    'text' => 'Ver Licencias',
+                    'url' => 'licencias/show',                    
+                ],
+                [
+                    'text' => 'Anulaciones',
+                    'url' => 'licencias/anulaciones',  
+                    'icon' => 'fas fa-fw fa-ban',                  
                 ],
             ],
         ],

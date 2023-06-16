@@ -28,6 +28,14 @@ class LicenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function annulations()
+    {
+        $licenciasAnuladas = Licencia::select('*')
+                                     ->where(['estado' => '0'])
+                                     ->orderBy('id', 'desc')
+                                     ->get();
+        return view('licencias/anulaciones', compact('licenciasAnuladas'));
+    }
     public function create()
     {
         //
@@ -40,38 +48,51 @@ class LicenciaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $datosLicencia = $request->except('_token', 'btnRegistrar');
-        try {                    
+    {       
 
-            $consultaCodigoAnt = Licencia::select('id','periodo')
-                                            /* ->where('periodo', date('Y')) */
+        try {
+            $datosLicencia = $request->except('_token', 'btnRegistrar');
+            $consultaCodigoAnt = Licencia::select('id','codLicencia','periodo')                                            
                                             ->orderBy('id', 'desc')
                                             ->first();
+        
+            if(empty($consultaCodigoAnt) || empty($consultaCodigoAnt->id) || empty($consultaCodigoAnt->periodo)) {
 
-            $codLicencia = array('codLicencia' => '000'.$consultaCodigoAnt->id+(1).'-'.$consultaCodigoAnt->periodo,
+                $codLicencia = array('codLicencia' => '0001-'.date('Y'),
                                 'periodo' => date('Y'));
-            
+                $registroLicencia = array_merge($codLicencia, $datosLicencia);            
+                
+            }else {
+                if ($consultaCodigoAnt->periodo != date('Y') ) {
 
-            $registroLicencia = array_merge($codLicencia, $datosLicencia);
-            Licencia::insert($registroLicencia);
-            
-            return response()->json($registroLicencia);
+                    $codLicencia = array('codLicencia' => '0001-'.date('Y') ,
+                                'periodo' =>  date('Y')); 
+                    $registroLicencia = array_merge($codLicencia, $datosLicencia);
+                
+                }else {
+                    /* $codLicencia = array('codLicencia' => '000'.$consultaCodigoAnt->id+(1).'-'.$consultaCodigoAnt->periodo,
+                                    'periodo' => date('Y'));*/  
+                    /* $generarCodigoLicencia = substr($consultaCodigoAnt->codLicencia, 2) + 1; */
+                    $generarCodigoLicencia = substr($consultaCodigoAnt->codLicencia, 0, 4) + 1;
+                    $codLicencia = array('codLicencia' => '000'.$generarCodigoLicencia.'-'.$consultaCodigoAnt->periodo,
+                                        'periodo' => date('Y'));
+
+                    $registroLicencia = array_merge($codLicencia, $datosLicencia);               
+                }           
+                
+            }
+            /* Licencia::insert($registroLicencia); */
+            Licencia::create($registroLicencia);
+            return redirect('licencias/show')->with('success', 'Licencia registrada correctamente');
+
         } catch (\Throwable $th) {
-            $codLicencia = array('codLicencia' => '0001-'.date('Y'),
-                             'periodo' => date('Y'));        
-
-            $registroLicencia = array_merge($codLicencia, $datosLicencia);
-            Licencia::insert($registroLicencia);
+            /* return redirect('licencias/show')->with('error', 'Error al registrar la licencia, contácte con la Oficina de Gobierno Digital');  */ 
+            return redirect('licencias/show')->with('error', $th->getMessage());          
         }
         
+        
 
-
-        /* $codLicencia = array('codLicencia' => '0001-'.date('Y'),
-                             'periodo' => date('Y'));        
-
-            $registroLicencia = array_merge($codLicencia, $datosLicencia);
-            Licencia::insert($registroLicencia); */
+        /* return response()->json($registroLicencia);      */   
     }
 
     /**
@@ -82,7 +103,10 @@ class LicenciaController extends Controller
      */
     public function show(/* Licencia $licencia */)
     {
-        $showRegistros = Licencia::orderBy('id', 'desc')->get();
+        $showRegistros = Licencia::select('*')
+                                 ->where(['estado'=>'1'])
+                                 ->orderBy('id', 'desc')
+                                 ->get();
 
         return view('licencias/visualizar', compact('showRegistros'));
     }
@@ -116,8 +140,48 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Licencia $licencia)
+    public function destroy($id/* Licencia $licencia */)
     {
-        //
+        
+        /* try {
+            $eliminarLicencia = Licencia::findOrFail($id);
+            $eliminarLicencia->delete();
+            return redirect('licencias/show')->with('success', 'Licencia anulada correctamente');
+        } catch (\Throwable $th) {
+            return redirect('licencias/show')->with('error', 'Error al anular la licencia, contácte con la Oficina de Gobierno Digital'); 
+        } */
+        try {
+            $cancelLicencia = Licencia::findOrFail($id);
+            $cancelLicencia->update(['estado' => 0]);
+            return redirect('licencias/show')->with('success', 'Licencia anulada correctamente');
+        } catch (\Throwable $th) {
+            return redirect('licencias/show')->with('error', 'Error al anular la licencia, contácte con la Oficina de Gobierno Digital'); 
+        }
+        
+    } 
+    
+    /* public function getLicencia($id)
+    {
+        $licencia = Licencia::select('*')
+                            ->where(['id' => $id])
+                            ->first();
+        return response()->json($licencia);
+    } */
+
+    public function fpdfLicencia($id)
+    {
+        $showDatosLicencia = Licencia::select('*')
+                            ->where(['id' => $id])
+                            ->first();
+        return view('pdf/pdf', compact('showDatosLicencia'));
     }
+    
+    public function anulacionPrint($id)
+    {
+        /* $anulacionPrint =  */Licencia::where(['id' => $id])
+                                       ->update(['print' => '1']);                                    
+                            
+        return "ok"; /* $anulacionPrint; *//* view('pdf/anulacion', compact('showDatosLicencia')); */
+    }
+    
 }

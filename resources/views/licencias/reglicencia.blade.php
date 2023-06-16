@@ -514,6 +514,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <input type="hidden" id="estado" name="estado" value="1">
+                                            <input type="hidden" id="print" name="print" value="0">
                                         </div>       
                                     </div>
                                 </x-adminlte-card>
