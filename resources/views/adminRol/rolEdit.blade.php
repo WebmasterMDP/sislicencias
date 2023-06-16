@@ -3,17 +3,17 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-
+    <h1>Asignar Roles</h1>
 @stop
 
 @section('content')
 <br>
-<x-adminlte-card title="REGISTRO USUARIO" class="m-2" theme="dark" icon="fas fa-id-card">
+<x-adminlte-card title="ACTUALIZACIÓN DE USUARIO" class="m-2" theme="dark" icon="fas fa-id-card">
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <form action="aUsuario" method="POST" autocomplete="off">
+                    <form action="{{ url('/rolUpdate/'.$users->id) }}" method="post" autocomplete="off">
                         @csrf
                         <div class="card-body">                                
                             <div class="row "> 
@@ -22,7 +22,22 @@
                                         <div class="col-md-12">
                                             {{-- NOMBRES --}}
                                             <label for="">NOMBRES</label>                                       
-                                            <x-adminlte-input type="text" name="name" id="name" placeholder="Ingrese nombres" label-class="text-lightblue">
+                                            <x-adminlte-input type="text" name="name" id="name" disabled value="{{$users->name}}" placeholder="Ingrese nombres" label-class="text-lightblue">
+                                                <x-slot name="prependSlot">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-user text-dark"></i>
+                                                    </div>
+                                                </x-slot>
+                                            </x-adminlte-input>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{-- APELLIDOS --}}
+                                            <label for="">APELLIDOS</label>                                       
+                                            <x-adminlte-input type="text" name="lastname" id="lastname" disabled value="{{$users->lastname}}" placeholder="Ingrese nombres" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
                                                     <div class="input-group-text">
                                                         <i class="fas fa-user text-dark"></i>
@@ -37,7 +52,7 @@
                                         <div class="col-md-12">
                                             {{-- DOC --}} 
                                             <label for="">DOC. NACIONAL IDENTIDAD</label>                                      
-                                            <x-adminlte-input type="text" name="numDocument" id="numDocument" placeholder="Ingrese documento" label-class="text-lightblue">
+                                            <x-adminlte-input type="text" name="numDocument" id="numDocument" disabled value="{{$users->numDocument}}" placeholder="Ingrese documento" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
                                                     <div class="input-group-text">
                                                         <i class="fas fa-id-card text-dark"></i>
@@ -47,44 +62,38 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            {{-- APELLIDOS --}}
-                                            <label for="">APELLIDOS</label>                                       
-                                            <x-adminlte-input type="text" name="lastname" id="lastname" placeholder="Ingrese apellidos" label-class="text-lightblue">
-                                                <x-slot name="prependSlot">
-                                                    <div class="input-group-text">
-                                                        <i class="fas fa-user text-dark"></i>
-                                                    </div>
-                                                </x-slot>
-                                            </x-adminlte-input>  
-                                        </div>
-                                    </div>
-                                </div>
+                                @foreach ($roles as $rol)
                                 <div class="col-md-1">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {{-- ADMIN --}} 
-                                            <label for="">ADMIN</label>
-                                            <x-adminlte-input type="checkbox" name="admin" id="admin" value="admin" label-class="text-lightblue">
+                                            {{-- VNC --}} 
+                                            <label for="">{{ $rol->name }}</label>
+                                            <x-adminlte-input type="checkbox" name="rol" id="rol" value="{{ $rol->id }}" placeholder="Ingrese IP" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
-                                                    <!-- <div class="input-group-text">
-                                                        <i class="fas fa-id-card text-dark"></i>
-                                                    </div> -->
                                                 </x-slot>
                                             </x-adminlte-input>  
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
+                                <!-- <label>
+                                    @foreach ($roles as $rol)
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="roles" id="roles" value="{{ $rol->id }}" checked>
+                                        {{ $rol->name }}
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                </label> -->
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-primary" name="btnBuscar" id="btnBuscar" type="submit">
+                                    <button class="btn btn-primary" type="submit">
                                         <i class="fas fa-upload"></i>
-                                        Registrar
+                                        Actualizar
                                     </button>                                                                       
                                 </div>                                       
                             </div>
@@ -106,6 +115,5 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
 
 @stop

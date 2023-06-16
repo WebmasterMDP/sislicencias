@@ -117,6 +117,7 @@
                                             <td>{{ $showRegistro->reciboPago }}</td>
                                             <td>{{ $showRegistro->fechaPago }}</td>
                                             <td>{{ $showRegistro->importe }}</td>
+<<<<<<< HEAD
                                             @if ($showRegistro->estado == 1)
                                             <td><span class="badge bg-success">Activo</span></td>
                                             @else
@@ -163,6 +164,8 @@
                                                 @endif --}}                                                                                                
                                             </td>
                                             
+=======
+>>>>>>> a7bff08bf7de131ea8fdfc575319e3af44b4094a
                                         </tr>
                                         @endforeach
                                     </tbody>

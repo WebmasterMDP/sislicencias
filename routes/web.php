@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\LicController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RolController;
+
 
 
 /*
@@ -28,7 +30,7 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Home.home');
 Route::get('/pdf', [App\Http\Controllers\PdfController::class, 'index'])->name('pdf');
 
 
@@ -36,23 +38,32 @@ Route::get('/pdf', [App\Http\Controllers\PdfController::class, 'index'])->name('
 /* Route::resource('registrarLic', LicController::class); */
 /* Route::get('reglicencia', [LicenciaController::class, 'index'])->name('reglicencia.index');
 Route::get('visualizar', [LicenciaController::class, 'show'])->name('visualizar.show'); */
+<<<<<<< HEAD
 Route::get('licencias/anulaciones', [LicenciaController::class, 'annulations'])->name('anulaciones');
 Route::get('licencias/fpdf/{id}', [LicenciaController::class, 'fpdfLicencia'])->name('fpdfLicencia');
 Route::resource('licencias', LicenciaController::class);
 
+=======
+Route::resource('licencias', LicenciaController::class);
+>>>>>>> a7bff08bf7de131ea8fdfc575319e3af44b4094a
 /* Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic'); */
 
-Route::get('lUsuario', [UserController::class, 'show'])->name('show');
 
-Route::get('aUsuario', [UserController::class, 'index'])->name('index');
-Route::post('aUsuario', [UserController::class, 'create'])->name('create');
-
+/* LISTA USUARIOS */
+Route::get('lUsuario', [UserController::class, 'show'])->name('User.show');
+/* AGREGAR USUARIOS */
+Route::get('aUsuario', [UserController::class, 'index'])->name('User.index');
+Route::post('aUsuario', [UserController::class, 'create'])->name('User.create');
 /* ACTUALIZACIÓN USUARIOS */
-Route::get('editUsuario/{id}', [UserController::class, 'edit'])->name('edit');
-Route::post('updateUsuario/{id}', [UserController::class, 'update'])->name('update');
-
+Route::get('editUsuario/{id}', [UserController::class, 'edit'])->name('User.edit');
+Route::post('updateUsuario/{id}', [UserController::class, 'update'])->name('User.update');
 /* ELIMINAR USUARIOS */
-Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('destroy');
+Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('User.destroy');
+
+/* ROLES Y PRIVILEGIOS */
+Route::get('r&p', [RolController::class, 'index'])->name('Role.index');
+Route::get('rolEdit/{id}', [RolController::class, 'edit'])->name('Role.edit');
+Route::post('rolUpdate/{id}', [RolController::class, 'update'])->name('Role.update');
 
 /* Route::post('/home', 'LicController@registrarLic'); */
 

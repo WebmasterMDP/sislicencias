@@ -48,6 +48,7 @@ class LicenciaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+<<<<<<< HEAD
     {       
 
         try {
@@ -93,6 +94,40 @@ class LicenciaController extends Controller
         
 
         /* return response()->json($registroLicencia);      */   
+=======
+    {
+        $datosLicencia = $request->except('_token', 'btnRegistrar');
+        try {                    
+
+            $consultaCodigoAnt = Licencia::select('id','periodo')
+                                            /* ->where('periodo', date('Y')) */
+                                            ->orderBy('id', 'desc')
+                                            ->first();
+
+            $codLicencia = array('codLicencia' => '000'.$consultaCodigoAnt->id+(1).'-'.$consultaCodigoAnt->periodo,
+                                'periodo' => date('Y'));
+            
+
+            $registroLicencia = array_merge($codLicencia, $datosLicencia);
+            Licencia::insert($registroLicencia);
+            
+            return response()->json($registroLicencia);
+        } catch (\Throwable $th) {
+            $codLicencia = array('codLicencia' => '0001-'.date('Y'),
+                             'periodo' => date('Y'));        
+
+            $registroLicencia = array_merge($codLicencia, $datosLicencia);
+            Licencia::insert($registroLicencia);
+        }
+        
+
+
+        /* $codLicencia = array('codLicencia' => '0001-'.date('Y'),
+                             'periodo' => date('Y'));        
+
+            $registroLicencia = array_merge($codLicencia, $datosLicencia);
+            Licencia::insert($registroLicencia); */
+>>>>>>> a7bff08bf7de131ea8fdfc575319e3af44b4094a
     }
 
     /**
@@ -103,10 +138,14 @@ class LicenciaController extends Controller
      */
     public function show(/* Licencia $licencia */)
     {
+<<<<<<< HEAD
         $showRegistros = Licencia::select('*')
                                  ->where(['estado'=>'1'])
                                  ->orderBy('id', 'desc')
                                  ->get();
+=======
+        $showRegistros = Licencia::orderBy('id', 'desc')->get();
+>>>>>>> a7bff08bf7de131ea8fdfc575319e3af44b4094a
 
         return view('licencias/visualizar', compact('showRegistros'));
     }

@@ -84,7 +84,7 @@
                                 <div class="col-sm-12">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fas fa-upload"></i>
-                                        Registrar
+                                        Actualizar
                                     </button>                                                                       
                                 </div>                                       
                             </div>

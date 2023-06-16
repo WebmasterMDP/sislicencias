@@ -304,8 +304,10 @@ return [
         [
             'text'    => 'Modulo de Licencias',
             'icon'    => 'fas fa-certificate',
+            'can'     => 'licencias.index',
             'submenu' => [
                 [
+<<<<<<< HEAD
                     'text' => 'Registrar Licencia',
                     'url'  => 'licencias',
                     'icon' => 'fas fa-fw fa-certificate',
@@ -318,6 +320,16 @@ return [
                     'text' => 'Anulaciones',
                     'url' => 'licencias/anulaciones',  
                     'icon' => 'fas fa-fw fa-ban',                  
+=======
+                    'text' => 'Registrar',
+                    'url'  => 'licencias',
+                    'can'  => 'licencias.index',
+                ],
+                [
+                    'text' => 'Visualizar',
+                    'url' => 'licencias/show',                   
+                    'can' => 'licencias.show',                   
+>>>>>>> a7bff08bf7de131ea8fdfc575319e3af44b4094a
                 ],
             ],
         ],
@@ -325,18 +337,27 @@ return [
         [
             'text'    => 'Administrador',
             'icon'    => 'fas fa-user-tie',
+            'can'     => 'User.index',
             'submenu' => [
                 [
                     'text' => 'Usuario',
                     'url'  => 'aUsuario',
+                    'can'  => 'User.index',
                 ],
                 [
                     'text' => 'Lista Usuarios',
                     'url'  => 'lUsuario',
+                    'can'  => 'User.show',
                 ],
             ],
         ],
-       
+
+        [
+            'text'    => 'Roles y Privilegios',
+            'icon'    => 'fas fa-user-tie',
+            'url'     => 'r&p',
+            'can'     => 'Role.index',
+        ],
     ],
 
     /*
