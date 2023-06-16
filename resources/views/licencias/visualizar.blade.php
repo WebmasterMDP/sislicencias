@@ -117,7 +117,6 @@
                                             <td>{{ $showRegistro->reciboPago }}</td>
                                             <td>{{ $showRegistro->fechaPago }}</td>
                                             <td>{{ $showRegistro->importe }}</td>
-<<<<<<< HEAD
                                             @if ($showRegistro->estado == 1)
                                             <td><span class="badge bg-success">Activo</span></td>
                                             @else
@@ -138,7 +137,7 @@
                                                         <span class="fas fa-ban"></span> 
                                                     </button>                                           
                                                 @else
-                                                    <a href="#" data-href="{{ url('licencias/fpdf/'.$showRegistro->id) }}" class="btn btn-info btn-print" data-toggle="modal" data-target="#modalLicencia" data-placement="top"  title="Imprimir">
+                                                    <a href="" data-href="{{ url('licencias/fpdf/'.$showRegistro->id) }}[path_file]#toolbar=0" class="btn btn-info btn-print" data-id="{{ $showRegistro->id }}" data-toggle="modal" data-target="#modalLicencia" data-placement="top"  title="Imprimir">
                                                         <span class="fas fa-print"></span>
                                                     </a>
                                                     <a href="" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modificar registro">
@@ -164,8 +163,6 @@
                                                 @endif --}}                                                                                                
                                             </td>
                                             
-=======
->>>>>>> a7bff08bf7de131ea8fdfc575319e3af44b4094a
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -208,7 +205,7 @@
     <x-adminlte-modal id="modalLicencia" title="Vista Previa de Licencia" size="lg" theme="dark"
     icon="fas fa-eye">
     <div class="modal-body">
-        <iframe id="frameLicencia" src="" width="100%" height="500px"></iframe>
+        <iframe id="frameLicencia" src="" width="100%" height="700px"></iframe>
     </div>
     
     {{-- <img class="img-fluid" src="" alt=""> --}}
@@ -248,10 +245,37 @@
         // document.getElementById('anulaRegistro').submit()
         /* $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>'); */
     });
+   
+    $('#confirm-delete').on('hide.bs.modal', function(e) {
+        anulaRegistro.setAttribute('action', '');
+    });
+
     $('#modalLicencia').on('show.bs.modal', function(e) {
-        $('#frameLicencia').attr('src', $(e.relatedTarget).data('href'));
-        $('.btn btn-info btn-print').attr('disabled', false);
+        $('#frameLicencia').attr('src', $(e.relatedTarget).data('href'));      
+        var id = $(e.relatedTarget).data('id');
         
+        /* $('.btn btn-info btn-print').attr('disabled', false); */
+        console.log(id);
+
+        $.ajax({
+            type: "GET",
+            url: "{{ url('licencias/print')}}"+"/"+id,
+            data: {
+                /* "_token": "{{ csrf_token() }}", */
+                /* "id": "{{ $showRegistro->id }}", */
+                /* "print": "1" */
+            },
+            success: function(response) {
+                
+               
+                if(response == "ok"){
+                    /* window.frames["frameLicencia"].focus(); */
+                    
+                }else{
+                    $('.btn btn-info btn-print').attr('disabled', true);
+                }
+            }
+        });
             /* $('#frameLicencia').attr('src', 'http://localhost/siscertificado/public/licencias/fpdf/1'); */
         
        
@@ -259,6 +283,11 @@
             /* $('#frameLicencia').get(0).contentWindow.print(); abre el print directamente*/
        
 
+    });
+    $('#modalLicencia').on('hide.bs.modal', function(e) {
+        $('#frameLicencia').attr('src', '');
+       
+        window.location.href = "{{ url('licencias/show')}}";
     });
 </script>
 @stop

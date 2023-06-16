@@ -9,7 +9,6 @@ class Licencia extends Model
 {
     use HasFactory;
     
-<<<<<<< HEAD
     protected $fillable = [
         'codLicencia',
         'periodo',
@@ -46,6 +45,4 @@ class Licencia extends Model
         'print',
         'estado',
     ];
-=======
->>>>>>> a7bff08bf7de131ea8fdfc575319e3af44b4094a
 }

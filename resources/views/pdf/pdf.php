@@ -81,6 +81,7 @@ $pdf = new PDF();
 
 $pdf->AliasNbPages();
 $pdf->AddPage();
+$pdf->SetTitle("Certificado de Autorización de Licencia de Funcionamiento");
 
 /* TITULO */
 $pdf->SetMargins(left:28, top:20);
@@ -88,12 +89,12 @@ $pdf->Ln(1);
 $pdf->SetFont('Arial','B',15);
 $pdf->Cell(0,15,utf8_decode('CERTIFICADO DE AUTORIZACIÓN'),0,0,'C');
 $pdf->Ln(5);
-$pdf->Cell(0,15,utf8_decode('DE LICENCIA DE FUNCIONAMIENTO N° '),0,0,'C');
+$pdf->Cell(0,15,utf8_decode('DE LICENCIA DE FUNCIONAMIENTO N° '.$showDatosLicencia->codLicencia),0,0,'C');
 $pdf->Ln(10);
 
 /* SUBTITULO */
 $pdf->SetFont('Arial', 'B',9);
-$pdf->Cell(0,15,utf8_decode('EXPEDIENTE Nº 01269-2023'),0,0,'L');
+$pdf->Cell(0,15,utf8_decode('EXPEDIENTE Nº 01269-2023'.$showDatosLicencia->expediente),0,0,'L');
 $pdf->Ln(4);
 $pdf->SetFont('Arial', 'B',9);
 $pdf->Cell(0,15,utf8_decode('RESOLUCIÓN DE GERENCIA Nº 0046-2023-MDP/GLDET'),0,0,'L');
@@ -113,13 +114,13 @@ $pdf->Ln(11);
 $pdf->SetFont('Arial', null,9);
 $pdf->Cell(40,15,utf8_decode('OTORGADO A '),0,0,'L');
 $pdf->SetFont('Arial', 'B',9);
-$pdf->Cell(15,15,utf8_decode(':'),0,0,'L');
+$pdf->Cell(15,15,utf8_decode(':'.$showDatosLicencia->apeNombre),0,0,'L');
 $pdf->Ln(4);
 
 $pdf->SetFont('Arial', null,9);
 $pdf->Cell(40,15,utf8_decode('R.U.C.'),0,0,'L');
 $pdf->SetFont('Arial', 'B',9);
-$pdf->Cell(15,15,utf8_decode(':'),0,0,'L');
+$pdf->Cell(15,15,utf8_decode(':'.$showDatosLicencia->ruc),0,0,'L');
 $pdf->Ln(4);
 
 $pdf->SetFont('Arial', null,9);
@@ -127,7 +128,7 @@ $pdf->Cell(0,15,utf8_decode('DIRECCIÓN DE ESTABLECIMIENTO COMERCIAL:'),0,0,'L')
 $pdf->Ln(4);
 
 $pdf->SetFont('Arial', 'B',9);
-$pdf->Cell(0,15,utf8_decode('abs'),0,0,'L');
+$pdf->Cell(0,15,utf8_decode($showDatosLicencia->dirEstable),0,0,'L');
 $pdf->Ln(4);
 
 $pdf->SetFont('Arial', null,9);
@@ -139,19 +140,19 @@ $pdf->Ln(4);
 $pdf->SetFont('Arial', null,9);
 $pdf->Cell(40,15,utf8_decode('GIRO(S) '),0,0,'L');
 $pdf->SetFont('Arial', 'B',9);
-$pdf->Cell(15,15,utf8_decode(':'),0,0,'L');
+$pdf->Cell(15,15,utf8_decode(':'.$showDatosLicencia->giroEstable.' '.$showDatosLicencia->observacion),0,0,'L');
 $pdf->Ln(4);
 
 $pdf->SetFont('Arial', null,9);
 $pdf->Cell(40,15,utf8_decode('ÁREA '),0,0,'L');
 $pdf->SetFont('Arial', 'B',9);
-$pdf->Cell(15,15,utf8_decode(':48.25 m²'),0,0,'L');
+$pdf->Cell(15,15,utf8_decode(':'.$showDatosLicencia->area),0,0,'L');
 $pdf->Ln(4);
 
 $pdf->SetFont('Arial', null,9);
 $pdf->Cell(40,15,utf8_decode('ZONIFICACIÓN '),0,0,'L');
 $pdf->SetFont('Arial', 'B',9);
-$pdf->Cell(15,15,utf8_decode(':CZ - COMERCIAL ZONAL'),0,0,'L');
+$pdf->Cell(15,15,utf8_decode(':'.$showDatosLicencia->zonificacion),0,0,'L');
 $pdf->Ln(4);
 
 $pdf->SetFont('Arial', null,9);
@@ -163,7 +164,7 @@ $pdf->Ln(4);
 $pdf->SetFont('Arial', null,9);
 $pdf->Cell(40,15,utf8_decode('VIGENCIA DE LICENCIA '),0,0,'L');
 $pdf->SetFont('Arial', 'B',9);
-$pdf->Cell(15,15,utf8_decode(':INDETERMINADA'),0,0,'L');
+$pdf->Cell(15,15,utf8_decode(':'.$showDatosLicencia->vigencia),0,0,'L');
 $pdf->Ln(15);
 
 /* SEGUNDO PARRAFO */
@@ -185,12 +186,9 @@ $pdf->SetFont('Arial', null, 9);
 $pdf->Cell(0,0,utf8_decode('Al ciere definitivo, tramitar el cese de la actividad económica.'),0,0,'L');
 $pdf->Ln(10);
 $pdf->SetFont('Arial', 'B', 9);
-$pdf->Cell(0,0,utf8_decode('PACHACAMAC, 08 de Mayo de 2023'),0,0,'L');
+$pdf->Cell(0,0,utf8_decode('PACHACAMAC, '.$showDatosLicencia->fechaExped),0,0,'L');
 $pdf->Ln(15);
 
-/* $pdf->write(0,4,$showRegistro,0,0,'J'); */
-
-$pdf->Write(5,$showDatosLicencia);
 $pdf->Output();
 exit;
 
