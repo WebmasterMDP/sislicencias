@@ -84,9 +84,9 @@ class LicController extends Controller
      */
     public function store(Request $request)
     {
-        $respuesta = $request->except('_token');
+        /* $respuesta = $request->except('_token'); */
 
         /* redirect()->route('home')->with('respuesta', $respuesta); */
-        return response()->json($respuesta);
+        /* return response()->json($respuesta); */
     }
 }

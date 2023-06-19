@@ -93,9 +93,12 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function edit(Licencia $licencia)
+    public function edit($id)
     {
-        //
+        $licencia = Licencia::where('id',$id)->first();
+        $sectors = Sector::orderBy('nombre', 'asc')->get();
+        $giros = Giro::orderBy('nombre', 'asc')->get();
+        return view('licencias/editar', compact('licencia', 'giros', 'sectors'));
     }
 
     /**
@@ -105,9 +108,12 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Licencia $licencia)
+    public function update(Request $request, $id)
     {
-        //
+        $datosLicencia = $request->except(['_token','_method','btnRegistrar']);
+        Licencia::where('id',$id)->update($datosLicencia);
+        /* var_dump($datosLicencia); */
+        return redirect('licencias/visualizar');
     }
 
     /**

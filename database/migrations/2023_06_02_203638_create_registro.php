@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('registros', function (Blueprint $table) {
             $table->id();
+            $table->string('codLicencia');
             $table->string('periodo');
             $table->string('vigencia');
             $table->string('natJurid');

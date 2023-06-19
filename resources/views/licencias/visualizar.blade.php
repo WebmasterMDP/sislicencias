@@ -69,6 +69,7 @@
                                             <th>FECHA DE PAGO</th>
                                             <th>IMPORTE</th>
                                             <th>PDF</th>
+                                            <th>editar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -109,6 +110,9 @@
                                             <td>{{ $showRegistro->importe }}</td>
                                             <td>
                                                 <a href='pdf/{{ $showRegistro->id }}'>descargar</a>
+                                            </td>
+                                            <td>
+                                                <a href='{{ $showRegistro->id }}/edit'>descargar</a>
                                             </td>
                                         </tr>
                                         @endforeach

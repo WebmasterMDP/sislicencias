@@ -16,11 +16,8 @@ class PDF extends FPDF
             new ImagickImageBackEnd()
         );
         $writer = new Writer($renderer); */
-        /* $writer->writeFile('Hello World!', 'qrcode.png'); */
-        
         // Logo
         $this->Image('vendor/adminlte/dist/img/escudo.png',10,8,33);
-        /* $this->Image('vendor/adminlte/dist/img/escudo.png',10,8,30); */
         // Arial bold 15
         $this->SetFont('Arial',null,16);
         // Movernos a la derecha
@@ -88,6 +85,11 @@ $pdf = new PDF();
 
 $pdf->AliasNbPages();
 $pdf->AddPage();
+
+/* $qr = QrCode::email('foo@bar.com'); */
+
+$pdf->Image($qr, 10, 10, 20, 20, "png");
+
 
 /* TITULO */
 $pdf->SetMargins(left:28, top:20);
