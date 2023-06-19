@@ -258,9 +258,7 @@
             type: "GET",
             url: "{{ url('licencias/print')}}"+"/"+id,
             data: {
-                /* "_token": "{{ csrf_token() }}", */
-                /* "id": "{{ $showRegistro->id }}", */
-                /* "print": "1" */
+
             },
             success: function(response) {
                 
