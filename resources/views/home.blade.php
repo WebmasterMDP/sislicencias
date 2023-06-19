@@ -37,7 +37,6 @@
                                                 </div>
 
                                                 <div class="col-lg-3 col-6">
-
                                                     <div class="small-box bg-success">
                                                         <div class="inner">
                                                             <h3>53<sup style="font-size: 20px">%</sup></h3>
@@ -65,7 +64,7 @@
                                                                 class="fas fa-arrow-circle-right"></i></a>
                                                     </div>
                                                 </div>
-
+                                                {!! QrCode::size(250)->generate('www.google.com'); !!}
                                                 <div class="col-lg-3 col-6">
 
                                                     <div class="small-box bg-danger">

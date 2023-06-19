@@ -1,18 +1,34 @@
 <?php
 
 use Codedge\Fpdf\Fpdf\Fpdf;
+<<<<<<< HEAD
 use Codedge\Fpdf\Fpdf\MultiCellBlt;
 
 /* require('.php'); */
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
+=======
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
+>>>>>>> development
 
 class PDF extends FPDF
 {
     function Header()
     {
+        /* $renderer = new ImageRenderer(
+            new RendererStyle(400),
+            new ImagickImageBackEnd()
+        );
+        $writer = new Writer($renderer); */
         // Logo
         $this->Image('vendor/adminlte/dist/img/escudo.png',10,8,33);
+<<<<<<< HEAD
         /* $this->Image('vendor/adminlte/dist/img/escudo.png',10,8,30); */
+=======
+>>>>>>> development
         // Arial bold 15
         $this->SetFont('Arial',null,16);
         // Movernos a la derecha
@@ -76,12 +92,23 @@ class PDF extends FPDF
         $this->Cell(0, 10, utf8_decode('ESTE CERTIFICADO DEBE EXHIBIRSE OBLIGATORIAMENTE EN UN LUGAR VISIBLE'),0,0,'C');
     }
 }
+$pdf = new PDF();
 
+<<<<<<< HEAD
 $pdf = new PDF();
 
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetTitle("Certificado de Autorización de Licencia de Funcionamiento");
+=======
+$pdf->AliasNbPages();
+$pdf->AddPage();
+
+/* $qr = QrCode::email('foo@bar.com'); */
+
+$pdf->Image($qr, 10, 10, 20, 20, "png");
+
+>>>>>>> development
 
 /* TITULO */
 $pdf->SetMargins(left:28, top:20);
@@ -121,6 +148,7 @@ $pdf->SetFont('Arial', null,9);
 $pdf->Cell(40,15,utf8_decode('R.U.C.'),0,0,'L');
 $pdf->SetFont('Arial', 'B',9);
 $pdf->Cell(15,15,utf8_decode(':'.$showDatosLicencia->ruc),0,0,'L');
+<<<<<<< HEAD
 $pdf->Ln(4);
 
 $pdf->SetFont('Arial', null,9);
@@ -165,6 +193,53 @@ $pdf->SetFont('Arial', null,9);
 $pdf->Cell(40,15,utf8_decode('VIGENCIA DE LICENCIA '),0,0,'L');
 $pdf->SetFont('Arial', 'B',9);
 $pdf->Cell(15,15,utf8_decode(':'.$showDatosLicencia->vigencia),0,0,'L');
+=======
+$pdf->Ln(10);
+
+$pdf->SetFont('Arial', null,9);
+$pdf->Cell(40,3,utf8_decode('DIRECCIÓN DE'),0,0,'L');$pdf->Ln(4);
+$pdf->Cell(40,3,utf8_decode('ESTABLECIMIENTO'),0,0,'L');
+$pdf->SetFont('Arial', 'B',9);
+$pdf->Cell(15,3,utf8_decode(':'.$showDatosLicencia->dirEstable),0,10,'L');;$pdf->Ln(1);
+$pdf->SetFont('Arial', null,9);
+$pdf->Cell(40,3,utf8_decode('COMERCIAL'),0,0,'L');
+$pdf->Ln(4);
+
+$pdf->SetFont('Arial', null,9);
+$pdf->Cell(40,3,utf8_decode('DISTRITO '),0,0,'L');
+$pdf->SetFont('Arial', 'B',9);
+$pdf->Cell(15,3,utf8_decode(':PACHACAMAC'),0,0,'L');
+$pdf->Ln(4);
+
+$pdf->SetFont('Arial', null,9);
+$pdf->Cell(40,3,utf8_decode('GIRO(S) '),0,0,'L');
+$pdf->SetFont('Arial', 'B',9);
+$pdf->Cell(15,3,utf8_decode(':'.$showDatosLicencia->giroEstable.' '.$showDatosLicencia->observacion),0,0,'L');
+$pdf->Ln(4);
+
+$pdf->SetFont('Arial', null,9);
+$pdf->Cell(40,3,utf8_decode('ÁREA '),0,0,'L');
+$pdf->SetFont('Arial', 'B',9);
+$pdf->Cell(15,3,utf8_decode(':'.$showDatosLicencia->area),0,0,'L');
+$pdf->Ln(4);
+
+$pdf->SetFont('Arial', null,9);
+$pdf->Cell(40,3,utf8_decode('ZONIFICACIÓN '),0,0,'L');
+$pdf->SetFont('Arial', 'B',9);
+$pdf->Cell(15,3,utf8_decode(':'.$showDatosLicencia->zonificacion),0,0,'L');
+$pdf->Ln(4);
+
+$pdf->SetFont('Arial', null,9);
+$pdf->Cell(40,3,utf8_decode('HORARIO DE ATENCIÓN '),0,0,'L');
+$pdf->SetFont('Arial', 'B',9);
+$pdf->Cell(15,3,utf8_decode(':07:00 horas a 23:00 horas'),0,0,'L');
+$pdf->Ln(4);
+
+$pdf->SetFont('Arial', null,9);
+$pdf->Cell(40,3,utf8_decode('VIGENCIA DE LICENCIA '),0,0,'L');
+$pdf->SetFont('Arial', 'B',9);
+$pdf->Cell(15,3,utf8_decode(':'.$showDatosLicencia->vigencia),0,0,'L');
+>>>>>>> development
 $pdf->Ln(15);
 
 /* SEGUNDO PARRAFO */
@@ -177,9 +252,15 @@ $pdf->Cell(0,15,utf8_decode('OBSERVACIONES:'),0,0,'L');
 $pdf->Ln(15);
 
 $pdf->SetFont('Arial', null, 9);
+<<<<<<< HEAD
 $pdf->MultiCellBlt(154, 4, '-', 'El establecimiento no debe ser objeto de queja de vecinos fundadas, bajo paercimiento de aplicarse las sanciones correspondientes y la revocatoria de la Licencia.');
 $pdf->MultiCellBlt(154, 4, '-', 'No se autoriza el uso de la vía pública ni el uso del retiro municipal con fines comerciales, bajo apercimiento de imponerse las sanciones correspondientes.');
 $pdf->MultiCellBlt(154, 4, '-', 'Se previlegian los principios de presunción de veracidad y de control posterior  contenidas en el T.U.O de la LPAG.');
+=======
+$pdf->MultiCellBlt(154, 4, '-', utf8_decode('El establecimiento no debe ser objeto de queja de vecinos fundadas, bajo paercimiento de aplicarse las sanciones correspondientes y la revocatoria de la Licencia.'));
+$pdf->MultiCellBlt(154, 4, '-', utf8_decode('No se autoriza el uso de la vía pública ni el uso del retiro municipal con fines comerciales, bajo apercimiento de imponerse las sanciones correspondientes.'));
+$pdf->MultiCellBlt(154, 4, '-', utf8_decode('Se previlegian los principios de presunción de veracidad y de control posterior  contenidas en el T.U.O de la LPAG.'));
+>>>>>>> development
 $pdf->Ln(5);
 
 $pdf->SetFont('Arial', null, 9);
@@ -191,5 +272,4 @@ $pdf->Ln(15);
 
 $pdf->Output();
 exit;
-
 ?>

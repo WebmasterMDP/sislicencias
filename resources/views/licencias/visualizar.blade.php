@@ -77,8 +77,13 @@
                                             <th>RECIBO DE PAGO</th>
                                             <th>FECHA DE PAGO</th>
                                             <th>IMPORTE</th>
+<<<<<<< HEAD
                                             <th>ESTADO</th>
                                             <th>ACCIONES</th>
+=======
+                                            <th>PDF</th>
+                                            <th>editar</th>
+>>>>>>> development
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -117,6 +122,7 @@
                                             <td>{{ $showRegistro->reciboPago }}</td>
                                             <td>{{ $showRegistro->fechaPago }}</td>
                                             <td>{{ $showRegistro->importe }}</td>
+<<<<<<< HEAD
                                             @if ($showRegistro->estado == 1)
                                             <td><span class="badge bg-success">Activo</span></td>
                                             @else
@@ -163,6 +169,14 @@
                                                 @endif --}}                                                                                                
                                             </td>
                                             
+=======
+                                            <td>
+                                                <a href='pdf/{{ $showRegistro->id }}'>descargar</a>
+                                            </td>
+                                            <td>
+                                                <a href='{{ $showRegistro->id }}/edit'>descargar</a>
+                                            </td>
+>>>>>>> development
                                         </tr>
                                         @endforeach
                                     </tbody>
