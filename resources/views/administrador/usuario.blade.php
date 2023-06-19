@@ -63,30 +63,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-4">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {{-- ADMIN --}} 
-                                            <label for="">Admin</label>
-                                            <x-adminlte-input type="checkbox" name="admin" id="admin" value="admin" label-class="text-lightblue">
+                                            {{-- ROL --}}
+                                            <label for="">ROL</label>  
+                                            <x-adminlte-select type="text" name="rol" id="rol" placeholder="Ingrese rol" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
-                                                    <!-- <div class="input-group-text">
+                                                    <div class="input-group-text">
                                                         <i class="fas fa-id-card text-dark"></i>
-                                                    </div> -->
+                                                    </div>
                                                 </x-slot>
-                                            </x-adminlte-input>  
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            {{-- ADMIN --}} 
-                                            <label for="">User</label>
-                                            <x-adminlte-input type="checkbox" name="usuario" id="usuario" value="usuario" label-class="text-lightblue">
-                                                <x-slot name="prependSlot">
-                                                </x-slot>
-                                            </x-adminlte-input>  
+                                                <option>usuario</option>
+                                                <option>admin</option>
+                                            </x-adminlte-select>
                                         </div>
                                     </div>
                                 </div>

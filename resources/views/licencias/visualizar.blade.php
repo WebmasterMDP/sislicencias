@@ -77,13 +77,9 @@
                                             <th>RECIBO DE PAGO</th>
                                             <th>FECHA DE PAGO</th>
                                             <th>IMPORTE</th>
-<<<<<<< HEAD
                                             <th>ESTADO</th>
                                             <th>ACCIONES</th>
-=======
-                                            <th>PDF</th>
-                                            <th>editar</th>
->>>>>>> development
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -122,7 +118,7 @@
                                             <td>{{ $showRegistro->reciboPago }}</td>
                                             <td>{{ $showRegistro->fechaPago }}</td>
                                             <td>{{ $showRegistro->importe }}</td>
-<<<<<<< HEAD
+
                                             @if ($showRegistro->estado == 1)
                                             <td><span class="badge bg-success">Activo</span></td>
                                             @else
@@ -136,7 +132,7 @@
                                                     <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
                                                         <span class="fas fa-print"></span>
                                                     </button>
-                                                    <button href="#" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Modificar registro">
+                                                    <button href="{{ $showRegistro->id }}/edit" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Modificar registro">
                                                         <span class='fas fa-edit'></span>
                                                     </button>                        
                                                     <button href="#" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Anular registro">
@@ -146,7 +142,7 @@
                                                     <a href="" data-href="{{ url('licencias/fpdf/'.$showRegistro->id) }}[path_file]#toolbar=0" class="btn btn-info btn-print" data-id="{{ $showRegistro->id }}" data-toggle="modal" data-target="#modalLicencia" data-placement="top"  title="Imprimir">
                                                         <span class="fas fa-print"></span>
                                                     </a>
-                                                    <a href="" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modificar registro">
+                                                    <a href="{{ $showRegistro->id }}/edit" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modificar registro">
                                                         <span class='fas fa-edit'></span>
                                                     </a>                                                                                                
                                                     {{-- @if (/* Route::has('licencias') */$showRegistro->estado == 1) --}}                                                
@@ -154,10 +150,8 @@
                                                         <span class="fas fa-ban"></span>
                                                     </a>                                                   
                                                 @endif
-                                                 
-                                                                                                
+                                                                                               
                                                 {{-- @endif --}}
-
                                                 {{-- @if ($showRegistro->estado == 1)
                                                 <a href="#" data-href="{{ route('licencias.destroy') }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Anular registro">
                                                     <span class="fas fa-ban"></span>
@@ -166,18 +160,9 @@
                                                 <a href="#" data-href="{{ route('licencias.destroy') }}" class="btn btn-success" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Activar registro">
                                                     <span class="fas fa-check"></span>
                                                 </a>
-                                                @endif --}}                                                                                                
-                                            </td>
-                                            
-=======
-                                            <td>
-                                                <a href='pdf/{{ $showRegistro->id }}'>descargar</a>
-                                            </td>
-                                            <td>
-                                                <a href='{{ $showRegistro->id }}/edit'>descargar</a>
-                                            </td>
->>>>>>> development
-                                        </tr>
+                                                @endif --}}    
+                                                </td>                                                                                          
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -247,8 +232,6 @@
         $('.btn-ok').on('click', function(e) {
             anulaRegistro.submit();            
         });
-
-       
 
         // if(confirm == true){
         //     e.preventDefault();

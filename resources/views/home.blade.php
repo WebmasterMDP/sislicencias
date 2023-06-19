@@ -64,7 +64,9 @@
                                                                 class="fas fa-arrow-circle-right"></i></a>
                                                     </div>
                                                 </div>
-                                                {!! QrCode::size(250)->generate('www.google.com'); !!}
+
+                                                <!-- {!! QrCode::size(250)->generate('www.google.com'); !!} -->
+
                                                 <div class="col-lg-3 col-6">
 
                                                     <div class="small-box bg-danger">
