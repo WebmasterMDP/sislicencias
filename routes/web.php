@@ -29,6 +29,10 @@ Route::get('/licencias/pdf/{id}', [PdfController::class, 'index'])->name('pdf');
 
 Route::get('/qr', [PdfController::class, 'show'])->name('qr');
 
+Route::get('lHabilitacion', [LicenciaController::class, 'habilitacion'])->name('habilitaciones');
+Route::get('licencias/desanular/{id}', [LicenciaController::class, 'desAnulacion'])->name('desanular');
+Route::get('licencias/anular/{id}', [LicenciaController::class, 'anulacion'])->name('anular');
+Route::get('licencias/desPrint/{id}', [LicenciaController::class, 'desAnulacionPrint'])->name('desPrint');
 /* Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia'); */
 /* Route::resource('registrarLic', LicController::class); */
 /* Route::get('reglicencia', [LicenciaController::class, 'index'])->name('reglicencia.index');
@@ -36,7 +40,7 @@ Route::get('visualizar', [LicenciaController::class, 'show'])->name('visualizar.
 Route::get('licencias/anulaciones', [LicenciaController::class, 'annulations'])->name('anulaciones');
 Route::get('licencias/fpdf/{id}', [LicenciaController::class, 'fpdfLicencia'])->name('fpdfLicencia');
 Route::get('licencias/print/{id}', [LicenciaController::class, 'anulacionPrint'])->name('print');
-Route::get('licencias/desanular/{id}', [LicenciaController::class, 'desAnulacion'])->name('desanular');
+
 Route::resource('licencias', LicenciaController::class);
 
 /* Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic'); */
@@ -53,9 +57,8 @@ Route::post('updateUsuario/{id}', [UserController::class, 'update'])->name('User
 Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('User.destroy');
 
 /* ROLES Y PRIVILEGIOS */
-Route::get('r&p', [RolController::class, 'index'])->name('Role.index');
+Route::get('ryp', [RolController::class, 'index'])->name('Role.index');
 Route::get('rolEdit/{id}', [RolController::class, 'edit'])->name('Role.edit');
-Route::get('lHabilitacion', [RolController::class, 'index'])->name('Role.index');
 Route::post('rolUpdate/{id}', [RolController::class, 'update'])->name('Role.update');
 
 /* Route::post('/home', 'LicController@registrarLic'); */

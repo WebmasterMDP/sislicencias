@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('administrador/usuario');
+        return view('administracion/usuario/usuario');
     }
 
     public function create()
@@ -36,13 +36,13 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user = $user->get();
-        return view('administrador/listaUsuario', compact('user'));
+        return view('administracion/usuario/listaUsuario', compact('user'));
     }
 
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('administrador/editUsuario', compact('user'));
+        return view('administracion/usuario/editUsuario', compact('user'));
     }
 
     public function update(Request $request, $id)

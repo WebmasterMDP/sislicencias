@@ -190,12 +190,39 @@ class LicenciaController extends Controller
         return "ok"; /* $anulacionPrint; *//* view('pdf/anulacion', compact('showDatosLicencia')); */
     }
 
+    public function habilitacion()
+    {
+        $showRegistros = Licencia::select('*')
+                            ->where(['estado' => '0'])
+                            ->orWhere(['print' => '1'])
+                            ->orderBy('id', 'desc')
+                            ->get();
+
+        return view('administracion/habilitacion', compact('showRegistros'));
+    }
+
     public function desAnulacion($id)
     {
-        /* $anulacionPrint =  */Licencia::where(['id' => $id])
-                                       ->update(['estado' => '1']);
+        Licencia::where(['id' => $id])
+                ->update(['estado' => '1']);
                             
-        return redirect('licencias/anulaciones'); /* $anulacionPrint; *//* view('pdf/anulacion', compact('showDatosLicencia')); */
+        return redirect('lHabilitacion');
+    }
+
+    public function anulacion($id)
+    {
+        Licencia::where(['id' => $id])
+                ->update(['estado' => '0']);
+                            
+        return redirect('lHabilitacion');
+    }
+
+    public function desAnulacionPrint($id)
+    {
+        Licencia::where(['id' => $id])
+                ->update(['print' => '0']);
+                            
+        return redirect('lHabilitacion');
     }
     
 }

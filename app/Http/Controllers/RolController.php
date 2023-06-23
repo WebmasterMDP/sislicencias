@@ -18,7 +18,7 @@ class RolController extends Controller
         $admins = $user->where('rol', '=', '1')
                         ->get();
 
-        return view('adminRol/rolIndex', compact('users', 'admins', 'alls'));
+        return view('administracion/rol/rolIndex', compact('users', 'admins', 'alls'));
     }
 
     public function edit($id)
@@ -26,7 +26,7 @@ class RolController extends Controller
         $roles = Role::all();
         $users = User::findOrFail($id);
 
-        return view('adminRol/rolEdit', compact('roles','users'));
+        return view('administracion/rol/rolEdit', compact('roles','users'));
     }
     
     public function update(Request $request, User $user, $id)
@@ -38,6 +38,7 @@ class RolController extends Controller
         /* $user->where('rol','=',$request->roles)->update(); */
         $user->roles()->sync($request->rol);
         
-        return redirect('r&p');
+        return redirect('ryp');
     }
+
 }

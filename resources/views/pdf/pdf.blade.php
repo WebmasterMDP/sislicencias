@@ -15,8 +15,6 @@ class PDF extends FPDF
     {
         // Logo
         $this->Image('vendor/adminlte/dist/img/escudo.png',10,8,33);
-
-        /* $this->Image( 'http://localhost/sislicencias/public/qr' ,158,8,28); */
         // Arial bold 15
         $this->SetFont('Arial',null,16);
         // Movernos a la derecha
@@ -85,7 +83,7 @@ $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 
-
+$pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost/sislicencias/public/licencias/pdf/'.$showDatosLicencia->id, 158,8,30, 0, 'PNG');
 /* $qr = QrCode::email('foo@bar.com'); */
 
 /* TITULO */

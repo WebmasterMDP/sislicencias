@@ -340,7 +340,7 @@ return [
                 ],
                 [
                     'text' => 'Roles y Privilegios',
-                    'url'  => 'r&p',
+                    'url'  => 'ryp',
                     'can'  => 'Role.index',
                 ],
                 [

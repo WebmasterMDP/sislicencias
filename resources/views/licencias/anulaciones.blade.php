@@ -117,10 +117,7 @@
                                                     </button>                        
                                                     <button href="#" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Anular registro">
                                                         <span class="fas fa-ban"></span> 
-                                                    </button>  
-                                                    <a href="{{ url('licencias/desanular/'.$licenciaAnulada->id) }}" data-href="" class="btn btn-success" data-placement="top" title="Desanular registro">
-                                                        <span class="fas fa-check-circle"></span>
-                                                    </a>  
+                                                    </button>
                                                 @else
                                                     <a href="" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Imprimir">
                                                         <span class="fas fa-print"></span>
@@ -131,9 +128,6 @@
                                                     <a href="#" data-href="{{ url('licencias/'.$licenciaAnulada->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Anular registro">
                                                         <span class="fas fa-ban"></span>
                                                     </a>
-                                                    <a href="#" data-href="{{ url('licencias/desanular'.$licenciaAnulada->id) }}" class="btn btn-success" data-placement="top" title="Desanular registro">
-                                                        <span class="fas fa-check-circle"></span>
-                                                    </a>  
                                                 @endif                                                                                           
                                             </td>
                                         </tr>
@@ -147,9 +141,6 @@
             </div>
         </div>
     </div> 
-    
-    </x-adminlte-modal>
-
 </x-adminlte-card>
 
 @stop
