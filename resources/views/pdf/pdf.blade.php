@@ -2,9 +2,9 @@
 
 use Codedge\Fpdf\Fpdf\Fpdf;
 use Codedge\Fpdf\Fpdf\MultiCellBlt;
-/* use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
+/* use League\CommonMark\Extension\CommonMark\Node\Inline\Strong; */
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use BaconQrCode\Renderer\ImageRenderer;
+/* use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\ImagickImageBackEnd;
 use BaconQrCode\Renderer\RendererStyle\RendererStyle;
 use BaconQrCode\Writer; */
@@ -15,6 +15,8 @@ class PDF extends FPDF
     {
         // Logo
         $this->Image('vendor/adminlte/dist/img/escudo.png',10,8,33);
+
+        /* $this->Image( 'http://localhost/sislicencias/public/qr' ,158,8,28); */
         // Arial bold 15
         $this->SetFont('Arial',null,16);
         // Movernos a la derecha

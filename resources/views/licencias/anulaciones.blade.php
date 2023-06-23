@@ -117,21 +117,25 @@
                                                     </button>                        
                                                     <button href="#" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Anular registro">
                                                         <span class="fas fa-ban"></span> 
-                                                    </button>                                           
+                                                    </button>  
+                                                    <a href="{{ url('licencias/desanular/'.$licenciaAnulada->id) }}" data-href="" class="btn btn-success" data-placement="top" title="Desanular registro">
+                                                        <span class="fas fa-check-circle"></span>
+                                                    </a>  
                                                 @else
-                                                    <a href="" class="btn btn-info" data-toggle="tooltip"  data-placement="top" title="Imprimir">
+                                                    <a href="" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Imprimir">
                                                         <span class="fas fa-print"></span>
                                                     </a>
                                                     <a href="" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Modificar registro">
                                                         <span class='fas fa-edit'></span>
-                                                    </a>                                                                                                
-                                                                                                 
+                                                    </a>                 
                                                     <a href="#" data-href="{{ url('licencias/'.$licenciaAnulada->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Anular registro">
                                                         <span class="fas fa-ban"></span>
-                                                    </a>                                                   
+                                                    </a>
+                                                    <a href="#" data-href="{{ url('licencias/desanular'.$licenciaAnulada->id) }}" class="btn btn-success" data-placement="top" title="Desanular registro">
+                                                        <span class="fas fa-check-circle"></span>
+                                                    </a>  
                                                 @endif                                                                                           
                                             </td>
-                                            
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -143,6 +147,9 @@
             </div>
         </div>
     </div> 
+    
+    </x-adminlte-modal>
+
 </x-adminlte-card>
 
 @stop

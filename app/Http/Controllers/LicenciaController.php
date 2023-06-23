@@ -31,9 +31,9 @@ class LicenciaController extends Controller
     public function annulations()
     {
         $licenciasAnuladas = Licencia::select('*')
-                                     ->where(['estado' => '0'])
-                                     ->orderBy('id', 'desc')
-                                     ->get();
+            ->where(['estado' => '0'])
+            ->orderBy('id', 'desc')
+            ->get();
         return view('licencias/anulaciones', compact('licenciasAnuladas'));
     }
     public function create()
@@ -188,6 +188,14 @@ class LicenciaController extends Controller
                                        ->update(['print' => '1']);                                    
                             
         return "ok"; /* $anulacionPrint; *//* view('pdf/anulacion', compact('showDatosLicencia')); */
+    }
+
+    public function desAnulacion($id)
+    {
+        /* $anulacionPrint =  */Licencia::where(['id' => $id])
+                                       ->update(['estado' => '1']);
+                            
+        return redirect('licencias/anulaciones'); /* $anulacionPrint; *//* view('pdf/anulacion', compact('showDatosLicencia')); */
     }
     
 }

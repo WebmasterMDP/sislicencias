@@ -28,6 +28,7 @@ class RoleSeeder extends Seeder
         $permission = Permission::create(['name' => 'licencias.index'])->syncRoles([$roleAdmin, $roleUser]);
         $permission = Permission::create(['name' => 'licencias.show'])->syncRoles([$roleAdmin, $roleUser]);
         $permission = Permission::create(['name' => 'licencias.edit'])->syncRoles([$roleAdmin, $roleUser]);
+        $permission = Permission::create(['name' => 'licencias.anulaciones'])->syncRoles([$roleAdmin, $roleUser]);
         $permission = Permission::create(['name' => 'licencias.update'])->syncRoles([$roleAdmin, $roleUser]);
         
         $permission = Permission::create(['name' => 'User.index'])->syncRoles([$roleAdmin]);

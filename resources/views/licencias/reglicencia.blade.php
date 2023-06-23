@@ -345,7 +345,7 @@
                                                                 </div>
                                                             </x-slot>
                                                             @foreach ($sectors as $sector)
-                                                            <option>{{ $sector->nombre }}</option>
+                                                            <option>{{ $sector->codSector }}</option>
                                                             @endforeach
                                                         </x-adminlte-select>
                                                     </div>

@@ -313,18 +313,18 @@ return [
                 ],
                 [
                     'text' => 'Ver Licencias',
-                    'url' => 'licencias/show',                    
+                    'url' => 'licencias/show',
                 ],
                 [
                     'text' => 'Anulaciones',
-                    'url' => 'licencias/anulaciones',  
-                    'icon' => 'fas fa-fw fa-ban',                  
+                    'url' => 'licencias/anulaciones',
+                    'icon' => 'fas fa-fw fa-ban',
                 ],
             ],
         ],
 
         [
-            'text'    => 'Administrador',
+            'text'    => 'Administracion',
             'icon'    => 'fas fa-user-tie',
             'can'     => 'User.index',
             'submenu' => [
@@ -338,14 +338,17 @@ return [
                     'url'  => 'lUsuario',
                     'can'  => 'User.show',
                 ],
+                [
+                    'text' => 'Roles y Privilegios',
+                    'url'  => 'r&p',
+                    'can'  => 'Role.index',
+                ],
+                [
+                    'text' => 'Habilitaciones',
+                    'url'  => 'lHabilitacion',
+                    'can'  => 'Role.index',
+                ],
             ],
-        ],
-
-        [
-            'text'    => 'Roles y Privilegios',
-            'icon'    => 'fas fa-user-tie',
-            'url'     => 'r&p',
-            'can'     => 'Role.index',
         ],
     ],
 

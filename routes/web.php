@@ -8,7 +8,6 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\PdfController;
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,12 +19,6 @@ use App\Http\Controllers\PdfController;
 |
 */
 
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
-
-
-
 
 Route::get('/', function () {
     return view('auth.login');
@@ -34,6 +27,7 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Home.home');
 Route::get('/licencias/pdf/{id}', [PdfController::class, 'index'])->name('pdf');
 
+Route::get('/qr', [PdfController::class, 'show'])->name('qr');
 
 /* Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia'); */
 /* Route::resource('registrarLic', LicController::class); */
@@ -42,6 +36,7 @@ Route::get('visualizar', [LicenciaController::class, 'show'])->name('visualizar.
 Route::get('licencias/anulaciones', [LicenciaController::class, 'annulations'])->name('anulaciones');
 Route::get('licencias/fpdf/{id}', [LicenciaController::class, 'fpdfLicencia'])->name('fpdfLicencia');
 Route::get('licencias/print/{id}', [LicenciaController::class, 'anulacionPrint'])->name('print');
+Route::get('licencias/desanular/{id}', [LicenciaController::class, 'desAnulacion'])->name('desanular');
 Route::resource('licencias', LicenciaController::class);
 
 /* Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic'); */
@@ -60,6 +55,7 @@ Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('
 /* ROLES Y PRIVILEGIOS */
 Route::get('r&p', [RolController::class, 'index'])->name('Role.index');
 Route::get('rolEdit/{id}', [RolController::class, 'edit'])->name('Role.edit');
+Route::get('lHabilitacion', [RolController::class, 'index'])->name('Role.index');
 Route::post('rolUpdate/{id}', [RolController::class, 'update'])->name('Role.update');
 
 /* Route::post('/home', 'LicController@registrarLic'); */
