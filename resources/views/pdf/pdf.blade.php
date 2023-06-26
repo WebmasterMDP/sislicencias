@@ -83,7 +83,7 @@ $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 
-$pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost/sislicencias/public/licencias/pdf/'.$showDatosLicencia->id, 158,8,30, 0, 'PNG');
+$pdf->Image('https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://localhost/sislicencias/public/licencias/pdf/'.$showDatosLicencia->id, 160,5,40, 0, 'PNG');
 /* $qr = QrCode::email('foo@bar.com'); */
 
 /* TITULO */
