@@ -225,10 +225,10 @@
                                 </x-adminlte-card>
 
 
-                                <x-adminlte-card title="LOCAL" class="m-2" theme="dark" icon="fas fa-id-card">
+                                <x-adminlte-card title="LOCAL" class="" theme="dark" icon="fas fa-id-card">
                                     <div class="col-12">                    
                                         <div class="row ">
-                                            <div class="col-md-6">
+                                            <div class="col-md-5">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         {{-- Direccion del Establecimiento --}}
@@ -392,7 +392,8 @@
                                                                     <i class="fas fa-id-card text-dark"></i>
                                                                 </div>
                                                             </x-slot>
-                                                            @foreach ($giros as $giro)
+                                                            {{-- <option>--Seleccione--</option> --}}
+                                                            @foreach ($giros as $giro)                                                            
                                                             <option>{{ $giro->nombre }}</option>
                                                             @endforeach
                                                         </x-adminlte-select>
@@ -438,17 +439,21 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         {{-- 2 --}}
-                                                        <label for="">ESTABLECIMIENTO</label>  
-                                                        <x-adminlte-textarea type="text" name="estable" id="estable" placeholder="Ingrese zona" label-class="text-lightblue">
+                                                        <label for="">ESTABLECIMIENTO</label>                                                          
+                                                        <x-adminlte-textarea type="text" name="estable" id="estable" placeholder="Ingrese zona" label-class="text-lightblue" readonly="readonly">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-map-pin text-dark"></i>
                                                                 </div>
                                                             </x-slot>
+                                                            <x-slot name="appendSlot">
+                                                                <x-adminlte-button label="Limpiar" id="clear" name="clear" icon="fas fa-lg fa-ban text-danger"/>
+                                                            </x-slot>                                                           
                                                         </x-adminlte-textarea>  
                                                     </div>
-                                                </div>
+                                                </div>                                      
                                             </div>
+                                            
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -525,7 +530,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button class="btn btn-primary" name="btnRegistrar" id="btnRegistrar" type="submit">
-                                        <i class="fas fa-upload"></i>
+                                        <i class="fas fa-check-double"></i>
                                         Registrar
                                     </button>                                                                       
                                 </div>                                       
@@ -547,20 +552,28 @@
 
     @section('js')
     <script>
-        /* $(function () {
-            $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        /* $(document).ready(function( */
+            /* document.getElementById("estable").disabled = true; */            
+            
+            $("#giroEstable").on("change", function(){
+                var giroEstable = $(this).val();
+                var estable = $("#estable").val();
+                
+                if (estable == ""){
+                    // $("#estable").val(giroEstable).appendTo($("#estable"));
+                    // $("#estable").prepend(giroEstable);
+                    $("#estable").val(giroEstable);
+                }else {
+                    document.getElementById("estable").value = estable +' - '+ giroEstable;
+                    
+                }
             });
-        }); */
+
+            $("#clear").on('click', function(){
+               
+                /* $("#estable").empty(); */
+                $("#estable").val(''); 
+                $("#giroEstable").val('<?php echo $giro->nombre; ?>').first();            
+            });
     </script>
     @stop
