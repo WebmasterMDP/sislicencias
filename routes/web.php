@@ -40,6 +40,7 @@ Route::get('visualizar', [LicenciaController::class, 'show'])->name('visualizar.
 Route::get('licencias/anulaciones', [LicenciaController::class, 'annulations'])->name('anulaciones');
 Route::get('licencias/fpdf/{id}', [LicenciaController::class, 'fpdfLicencia'])->name('fpdfLicencia');
 Route::get('licencias/print/{id}', [LicenciaController::class, 'anulacionPrint'])->name('print');
+Route::get('licencias/getSunatDatos/{ruc}', [LicenciaController::class, 'getSunatDatos'])->name('getSunatDatos');;
 
 Route::resource('licencias', LicenciaController::class);
 
