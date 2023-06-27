@@ -224,5 +224,17 @@ class LicenciaController extends Controller
                             
         return redirect('lHabilitacion');
     }
+    public function getSunatDatos($ruc){
+        $url = 'https://ws3.pide.gob.pe/Rest/Sunat/DatosPrincipales?';
+
+        $response = file_get_contents($url.'numruc='.$ruc.'&out=json'); 
+        $data = json_decode($response, true);
+        return response()->json($data);
+
+        
+        
+        /* $data = json_decode($res->getBody(), true);
+        return response()->json($data); */
+    }
     
 }

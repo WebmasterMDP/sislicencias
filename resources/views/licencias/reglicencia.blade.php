@@ -156,6 +156,14 @@
                                                                     <i class="fas fa-id-card text-dark"></i>
                                                                 </div>
                                                             </x-slot>
+                                                            <x-slot name="appendSlot">
+                                                                {{-- <div class="input-group-text">
+                                                                    <i class="fas fa-search text-dark"></i>
+                                                                </div> --}}
+                                                                <a href="#" data-href="" class="btn btn-dark" id="getSunatDatos" name="getSunatDatos" data-target="#getSunatDatos" data-placement="top" title="Cargar Registro">
+                                                                    <span class="fas fa-sync"></span>
+                                                                </a>
+                                                            </x-slot>
                                                         </x-adminlte-input>  
                                                     </div>
                                                 </div>
@@ -574,6 +582,67 @@
                 /* $("#estable").empty(); */
                 $("#estable").val(''); 
                 $("#giroEstable").val('<?php echo $giro->nombre; ?>').first();            
+            });
+
+            $("#getSunatDatos").on("click", function(){
+                var ruc = $("#ruc").val();
+                var url = "{{ route('getSunatDatos', ':ruc') }}";                
+                url = url.replace(':ruc', ruc);
+               
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response.list.multiRef['cod_dep']['@nil']);
+
+                        var datosNull = response.list.multiRef['cod_dep']['@nil'];
+
+                        if (datosNull) {
+                           alert('Datos no encontrados');
+                            /* Swal.fire({
+                                icon: 'success',
+                                title: 'Datos encontrados!',
+                                text: 'RUC encontrado!',
+                                footer: '<a href>Why do I have this issue?</a>'
+                            }) */
+                            
+                        }else{
+                            alert('Datos Encontrados');
+                            responseDatosSunat = response.list.multiRef;
+
+                            console.log(responseDatosSunat);
+                            console.log(responseDatosSunat["ddp_nombre"]["$"]);
+
+                            $("#repLegal").val(responseDatosSunat["ddp_nombre"]["$"]);
+                            /* Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'RUC no encontrado!',
+                                footer: '<a href>Why do I have this issue?</a>'
+                            })
+                            $("#ruc").val('');
+                            $("#razonSocial").val('');
+                            $("#direccion").val('');
+                            $("#estado").val('');
+                            $("#estable").val('');
+                            $("#giroEstable").val('');
+                            $("#repLegal").val(''); */
+                            return false;
+                        }
+
+                        /* console.log(response.list.multiRef); */
+                        
+                           
+                        /* $("#razonSocial").val(element.razonSocial);
+                        $("#direccion").val(element.direccion);
+                        $("#estado").val(element.estado);
+                        $("#estable").val(element.estable);
+                        $("#giroEstable").val(element.giroEstable); */
+                        
+                       
+                    }
+                });
             });
     </script>
     @stop
