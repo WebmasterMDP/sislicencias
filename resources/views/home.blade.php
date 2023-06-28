@@ -145,7 +145,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table id="example" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+                    <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
                         <thead class="text-center text-nowrap bg-info ">
                             <tr>
                                 <th>Codigo Licencia</th>
@@ -184,7 +184,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table id="example3" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+                    <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
                         <thead class="text-center text-nowrap bg-info ">
                             <tr>
                                 <th>Codigo Licencia</th>
@@ -223,7 +223,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table id="example4" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
+                    <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
                         <thead class="text-center text-nowrap bg-info ">
                             <tr>
                                 <th>Codigo Licencia</th>
@@ -282,22 +282,4 @@
     paging: true
     } );
 </script>
-
-<!-- <script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script> -->
 @stop

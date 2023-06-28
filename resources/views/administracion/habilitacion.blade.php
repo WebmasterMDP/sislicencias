@@ -111,10 +111,10 @@
                                             <td> <br>
 
                                             @if ( $showRegistro->estado == 0 && $showRegistro->print == 1)
-                                                <a href="{{ url('licencias/desanular/'.$showRegistro->id) }}" data-href="" class="btn btn-success" data-placement="top" title="Desanular Registro">
+                                                <a href="#" data-href="{{ url('licencias/desanular/'.$showRegistro->id) }}" data-toggle="modal" data-target="#modalDesanular" class="btn btn-success" data-placement="top" title="Desanular Registro">
                                                     <span class="fas fa-check-circle"></span>
                                                 </a>  
-                                                <a href="{{ url('licencias/desPrint/'.$showRegistro->id) }}" data-href="" class="btn btn-info" data-placement="top" title="Habilitar Impresion">
+                                                <a href="#" data-href="{{ url('licencias/desPrint/'.$showRegistro->id) }}" data-toggle="modal" data-target="#modalDesPrint" class="btn btn-info" data-placement="top" title="Habilitar Impresion">
                                                     <span class="fas fa-print"></span>
                                                 </a>
                                                 <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
@@ -122,7 +122,7 @@
                                                 </button>
 
                                             @elseif ( $showRegistro->estado == 0 && $showRegistro->print != 1 )
-                                                <a href="{{ url('licencias/desanular/'.$showRegistro->id) }}" data-href="" class="btn btn-success" data-placement="top" title="Desanular Registro">
+                                                <a href="#" data-href="{{ url('licencias/desanular/'.$showRegistro->id) }}" data-toggle="modal" data-target="#modalDesanular" class="btn btn-success" data-placement="top" title="Desanular Registro">
                                                     <span class="fas fa-check-circle"></span>
                                                 </a>
                                                 <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
@@ -136,12 +136,15 @@
                                                 <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
                                                     <span class="fas fa-check-circle"></span>
                                                 </button>
-                                                <a href="{{ url('licencias/desPrint/'.$showRegistro->id) }}" data-href="" class="btn btn-info" data-placement="top" title="Habilitar Impresion">
+                                                <a href="#" data-href="{{ url('licencias/desPrint/'.$showRegistro->id) }}" class="btn btn-info" data-toggle="modal" data-target="#modalDesPrint" data-placement="top" title="Habilitar Impresion">
                                                     <span class="fas fa-print"></span>
                                                 </a>
-                                                <a href="{{ url('licencias/anular/'.$showRegistro->id) }}" data-href="" class="btn btn-danger" data-placement="top" title="Desanular Registro">
-                                                    <span class="fas fa-ban"></span>
+                                                <a href="#" data-href="{{ url('licencias/anular/'.$showRegistro->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete" data-placement="top" title="Anular registro">
+                                                        <span class="fas fa-ban"></span>
                                                 </a>
+<!--                                                 <a href="{{ url('licencias/anular/'.$showRegistro->id) }}" data-href="" class="btn btn-danger" data-placement="top" title="Desanular Registro">
+                                                    <span class="fas fa-ban"></span>
+                                                </a> -->
                                             @endif
                                             </td>
                                         </tr>
@@ -155,13 +158,128 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="modalDesanular" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">¿Desea activar este registro?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="deanulaRegistro" name="deanulaRegistro" action="#" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <p>Ingrese el motivo por el que desea habilitar el registro</p>
+                        <input type="text" class="form-control" id="razon" name="razon" required placeholder="Ingrese motivo">
+                        <input type="hidden" value="{{$showRegistro->estado}}" name=estado>
+                        <input type="hidden" value="{{$showRegistro->print}}" name=print>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-light" data-dismiss="modal">No</a>
+                        <a class="btn btn-success btn-ok">Si</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalDesPrint" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">¿Desea habilitar la impresión?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="habilitaPrint" name="habilitaPrint" action="#" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <p>Ingrese el motivo por el que desea habilitar la impresion</p>
+                        <input type="text" class="form-control" id="razon" name="razon" required placeholder="Ingrese motivo">
+                        <input type="hidden" value="{{$showRegistro->estado}}" name=estado>
+                        <input type="hidden" value="{{$showRegistro->print}}" name=print>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-light" data-dismiss="modal">No</a>
+                        <a class="btn btn-info btn-ok">Si</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">¿Desea anular este registro?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="anulaRegistro" name="anulaRegistro" action="#" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <p>Ingrese el motivo por el que desea anular el registro</p>
+                        <input type="text" class="form-control" id="razon" name="razon" required placeholder="Ingrese motivo">
+                        <input type="hidden" value="{{$showRegistro->estado}}" name=estado>
+                        <input type="hidden" value="{{$showRegistro->print}}" name=print>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-light" data-dismiss="modal">No</a>
+                        <a class="btn btn-danger btn-ok">Si</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </x-adminlte-card>
 
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="http://localhost/siscertificado/vendor/almasaeed2010/adminlte/dist/css/adminlte.css"> --}}
 @stop
 
 @section('js')
+<script>
+    $('#modalDesanular').on('show.bs.modal', function(e) {
+        deanulaRegistro.setAttribute('action', $(e.relatedTarget).data('href'));        
+           
+        $('.btn-ok').on('click', function(e) {
+            deanulaRegistro.submit();
+        });
+    });
+   
+    $('#modalDesanular').on('hide.bs.modal', function(e) {
+        deanulaRegistro.setAttribute('action', '');
+    });
+
+
+    $('#modalDesPrint').on('show.bs.modal', function(e) {
+        habilitaPrint.setAttribute('action', $(e.relatedTarget).data('href'));        
+           
+        $('.btn-ok').on('click', function(e) {
+            habilitaPrint.submit();
+        });
+    });
+   
+    $('#modalDesPrint').on('hide.bs.modal', function(e) {
+        habilitaPrint.setAttribute('action', '');
+    });
+
+    $('#modalDelete').on('show.bs.modal', function(e) {
+        anulaRegistro.setAttribute('action', $(e.relatedTarget).data('href'));        
+           
+        $('.btn-ok').on('click', function(e) {
+            anulaRegistro.submit();
+        });
+    });
+   
+    $('#modalDelete').on('hide.bs.modal', function(e) {
+        anulaRegistro.setAttribute('action', '');
+    });
+    
+</script>
 @stop

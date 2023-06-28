@@ -28,10 +28,6 @@
                                                     <span class="badge bg-purple"></span>
                                                     <i class="fas fa-user-secret fa-5x"></i> Administradores
                                                 </a>
-                                                <!-- <button type="button" toggle="modal2" style="width: 300px; height: 300px;" class="btn btn-block btn-outline-success btn-lg">
-                                                    <span class="badge bg-purple"></span>
-                                                    <i class="fas fa-user-secret fa-8x"></i> Administradores
-                                                </button> -->
                                             </div>
                                             <div class="col-md-6 px-5">
                                                 <a style=" text-align: center; vertical-align: middle;" data-toggle="modal" type="button" class="btn btn-block btn-outline-secondary btn-lg" href="#modal1">
@@ -55,7 +51,7 @@
                                                             <td>{{ $all->name }}</td>
                                                             <td>{{ $all->email }}</td>
                                                             <td class="text-center">
-                                                                <form action="{{ url('/rolEdit/'.$all->id) }}">
+                                                                <form action="{{ url('/roledit/'.$all->id) }}">
                                                                     <button class="btn btn-warning" title="Editar" name="btnEdit" id="btnEdit" type="submit">
                                                                     <i class="fas fa-edit"></i>
                                                                     </button>
@@ -77,8 +73,6 @@
         </div>
     </section>
 </x-adminlte-card>
-
-<!-- <a href="#victorModal" role="button" class="btn btn-large btn-primary" data-toggle="modal">Abrir ventana modal</a> -->
   
 <!-- Modal / Ventana / Overlay en HTML -->
 <div id="modal1" class="modal fade">
@@ -106,7 +100,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
             </div>
         </div>
     </div>
@@ -137,7 +130,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
             </div>
         </div>
     </div>
@@ -151,10 +143,4 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
-
-    <script>
-        document.getElementById("btn").addEventListener("click", function() {
-            document.getElementById("victorModal").style.display="show";
-        });
-    </script>
 @stop

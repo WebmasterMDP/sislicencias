@@ -11,12 +11,8 @@ class RolController extends Controller
     public function index(User $user)
     {
         $alls = $user->get();
-
-        $users = $user->where('rol', '=', '2')
-                        ->get();
-                        
-        $admins = $user->where('rol', '=', '1')
-                        ->get();
+        $users = $user->where('rol', '=', '2')->get();
+        $admins = $user->where('rol', '=', '1')->get();
 
         return view('administracion/rol/rolIndex', compact('users', 'admins', 'alls'));
     }
@@ -34,8 +30,8 @@ class RolController extends Controller
         $datosUser = $request->except(['_token','_method']);
         User::where('id',$id)->update($datosUser);
 
+        /* ACTUALIZACION DE ROLES */
         $user = User::findOrFail($id);
-        /* $user->where('rol','=',$request->roles)->update(); */
         $user->roles()->sync($request->rol);
         
         return redirect('ryp');

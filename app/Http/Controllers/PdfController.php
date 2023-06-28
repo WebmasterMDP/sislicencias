@@ -20,4 +20,8 @@ class PdfController extends Controller
     {      
         return view('pdf/qr');
     }
+    public function watch()
+    {
+        return view('sweet');
+    }
 }

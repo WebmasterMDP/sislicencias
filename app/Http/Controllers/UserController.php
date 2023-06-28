@@ -18,14 +18,17 @@ class UserController extends Controller
         $user = new User();
 
         $user->name = request('name');
-        $user->numDocument = request('numDocument');
         $user->lastname = request('lastname');
+        $user->numDocument = request('numDocument');
+        $user->email = request('correo');
         $user->username = request('numDocument');
         $user->password = Hash::make(request('numDocument'));
+
+        /* ASIGNACION DEL ROL */
         $user->assignRole(request('rol'));
         $user->save();
 
-        return redirect('aUsuario');
+        return redirect('agregar/usuario');
     }
 
     public function store(Request $request)
@@ -47,11 +50,12 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        /* ACTUALIZACION DE DATOS BASICOS */
+        /* Nota: la actualizacion de roles se encuentra el RolController */
         $datosUser = $request->except(['_token','_method']);
         User::where('id',$id)->update($datosUser);
-        $user = User::findOrFail($id);
 
-        return redirect('lUsuario');
+        return redirect('lista/usuario');
     }
 
     public function destroy(User $user, $id)

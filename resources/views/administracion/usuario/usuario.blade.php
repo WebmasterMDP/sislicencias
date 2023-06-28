@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <form action="aUsuario" method="POST" autocomplete="off">
+                    <form action="{{ url('agregar/usuario') }}" method="POST" autocomplete="off">
                         @csrf
                         <div class="card-body">
                             <div class="row "> 
@@ -23,7 +23,7 @@
                                         <div class="col-md-12">
                                             {{-- NOMBRES --}}
                                             <label for="">NOMBRES</label>                                       
-                                            <x-adminlte-input type="text" name="name" id="name" placeholder="Ingrese nombres" label-class="text-lightblue">
+                                            <x-adminlte-input type="text" required name="name" id="name" placeholder="Ingrese nombres" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
                                                     <div class="input-group-text">
                                                         <i class="fas fa-user text-dark"></i>
@@ -36,9 +36,24 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-12">
+                                            {{-- APELLIDOS --}}
+                                            <label for="">APELLIDOS</label>
+                                            <x-adminlte-input type="text" required name="lastname" id="lastname" placeholder="Ingrese apellidos" label-class="text-lightblue">
+                                                <x-slot name="prependSlot">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-user text-dark"></i>
+                                                    </div>
+                                                </x-slot>
+                                            </x-adminlte-input>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
                                             {{-- DOC --}} 
                                             <label for="">DOC. NACIONAL IDENTIDAD</label>                                      
-                                            <x-adminlte-input type="text" name="numDocument" id="numDocument" placeholder="Ingrese documento" label-class="text-lightblue">
+                                            <x-adminlte-input type="number" required name="numDocument" id="numDocument" placeholder="Ingrese documento" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
                                                     <div class="input-group-text">
                                                         <i class="fas fa-id-card text-dark"></i>
@@ -51,24 +66,24 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {{-- APELLIDOS --}}
-                                            <label for="">APELLIDOS</label>
-                                            <x-adminlte-input type="text" name="lastname" id="lastname" placeholder="Ingrese apellidos" label-class="text-lightblue">
+                                            {{-- CORREO --}} 
+                                            <label for="">CORREO</label>                                      
+                                            <x-adminlte-input type="email" required name="correo" id="correo" placeholder="Ingrese Correo" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
                                                     <div class="input-group-text">
-                                                        <i class="fas fa-user text-dark"></i>
+                                                    <i class="fas fa-envelope text-dark"></i>
                                                     </div>
                                                 </x-slot>
-                                            </x-adminlte-input>  
+                                            </x-adminlte-input>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-12">
                                             {{-- ROL --}}
                                             <label for="">ROL</label>  
-                                            <x-adminlte-select type="text" name="rol" id="rol" placeholder="Ingrese rol" label-class="text-lightblue">
+                                            <x-adminlte-select type="text" required name="rol" id="rol" placeholder="Ingrese rol" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
                                                     <div class="input-group-text">
                                                         <i class="fas fa-id-card text-dark"></i>
@@ -105,10 +120,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
-
 @stop

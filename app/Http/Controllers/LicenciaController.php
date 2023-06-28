@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Licencia;
+use App\Models\Seguimiento;
 use Illuminate\Http\Request;
 use App\Models\Registro;
 use App\Models\Sector;
 use App\Models\Giro;
+use Illuminate\Support\Facades\Auth;
 
 class LicenciaController extends Controller
 {
@@ -148,20 +150,21 @@ class LicenciaController extends Controller
      */
     public function destroy($id/* Licencia $licencia */)
     {
-        
-        /* try {
-            $eliminarLicencia = Licencia::findOrFail($id);
-            $eliminarLicencia->delete();
-            return redirect('licencias/show')->with('success', 'Licencia anulada correctamente');
-        } catch (\Throwable $th) {
-            return redirect('licencias/show')->with('error', 'Error al anular la licencia, contácte con la Oficina de Gobierno Digital'); 
-        } */
+        $seguimiento = new Seguimiento();
+        $seguimiento->licencia_id = $id;
+        $seguimiento->estado = request('estado');
+        $seguimiento->print = request('print');
+        $seguimiento->observacion = request('razon');
+        $seguimiento->save();
         try {
+
             $cancelLicencia = Licencia::findOrFail($id);
             $cancelLicencia->update(['estado' => 0]);
+            /* var_dump($seguimiento); */
+
             return redirect('licencias/show')->with('success', 'Licencia anulada correctamente');
         } catch (\Throwable $th) {
-            return redirect('licencias/show')->with('error', 'Error al anular la licencia, contácte con la Oficina de Gobierno Digital'); 
+            return redirect('licencias/show')->with('error', 'Error al anular la licencia, contácte con la Oficina de Gobierno Digital');
         }
         
     } 
@@ -185,8 +188,8 @@ class LicenciaController extends Controller
     public function anulacionPrint($id)
     {
         /* $anulacionPrint =  */Licencia::where(['id' => $id])
-                                       ->update(['print' => '1']);                                    
-                            
+                                       ->update(['print' => '1']);
+        
         return "ok"; /* $anulacionPrint; *//* view('pdf/anulacion', compact('showDatosLicencia')); */
     }
 
@@ -203,26 +206,66 @@ class LicenciaController extends Controller
 
     public function desAnulacion($id)
     {
+        if(request('razon')==null){
+
+            return redirect('listahabilitacion')->with('success','Ingrese el motivo por el cual desea desanular');
+            
+        }else{
+            
         Licencia::where(['id' => $id])
                 ->update(['estado' => '1']);
-                            
-        return redirect('lHabilitacion');
+
+            $usuario = auth()->user()->username;
+
+            $seguimiento = new Seguimiento();
+            $seguimiento->licencia_id = $id;
+            $seguimiento->estado = '1';
+            $seguimiento->print = request('print');
+            $seguimiento->observacion = request('razon');
+            $seguimiento->usuario = $usuario;
+
+            $seguimiento->save();
+
+        return redirect('listahabilitacion');
+        }
     }
 
     public function anulacion($id)
     {
         Licencia::where(['id' => $id])
                 ->update(['estado' => '0']);
+
+            $usuario = auth()->user()->username;
+
+            $seguimiento = new Seguimiento();
+            $seguimiento->licencia_id = $id;
+            $seguimiento->estado = '0';
+            $seguimiento->print = request('print');
+            $seguimiento->observacion = request('razon');
+            $seguimiento->usuario = $usuario;
+            
+            $seguimiento->save();
                             
-        return redirect('lHabilitacion');
+        return redirect('listahabilitacion');
     }
 
     public function desAnulacionPrint($id)
     {
         Licencia::where(['id' => $id])
                 ->update(['print' => '0']);
-                            
-        return redirect('lHabilitacion');
+
+            $usuario = auth()->user()->username;
+
+            $seguimiento = new Seguimiento();
+            $seguimiento->licencia_id = $id;
+            $seguimiento->estado = request('estado');
+            $seguimiento->print = '0';
+            $seguimiento->observacion = request('razon');
+            $seguimiento->usuario = $usuario;
+
+            $seguimiento->save();
+
+        return redirect('listahabilitacion');
     }
     public function getSunatDatos($ruc){
         $url = 'https://ws3.pide.gob.pe/Rest/Sunat/DatosPrincipales?';
@@ -231,8 +274,6 @@ class LicenciaController extends Controller
         $data = json_decode($response, true);
         return response()->json($data);
 
-        
-        
         /* $data = json_decode($res->getBody(), true);
         return response()->json($data); */
     }

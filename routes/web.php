@@ -29,10 +29,10 @@ Route::get('/licencias/pdf/{id}', [PdfController::class, 'index'])->name('pdf');
 
 Route::get('/qr', [PdfController::class, 'show'])->name('qr');
 
-Route::get('lHabilitacion', [LicenciaController::class, 'habilitacion'])->name('habilitaciones');
-Route::get('licencias/desanular/{id}', [LicenciaController::class, 'desAnulacion'])->name('desanular');
-Route::get('licencias/anular/{id}', [LicenciaController::class, 'anulacion'])->name('anular');
-Route::get('licencias/desPrint/{id}', [LicenciaController::class, 'desAnulacionPrint'])->name('desPrint');
+Route::get('listahabilitacion', [LicenciaController::class, 'habilitacion'])->name('habilitaciones');
+Route::post('licencias/desanular/{id}', [LicenciaController::class, 'desAnulacion'])->name('desanular');
+Route::post('licencias/anular/{id}', [LicenciaController::class, 'anulacion'])->name('anular');
+Route::post('licencias/desPrint/{id}', [LicenciaController::class, 'desAnulacionPrint'])->name('desPrint');
 /* Route::get('reglicencia', [LicController::class, 'index'])->name('reglicencia'); */
 /* Route::resource('registrarLic', LicController::class); */
 /* Route::get('reglicencia', [LicenciaController::class, 'index'])->name('reglicencia.index');
@@ -44,25 +44,24 @@ Route::get('licencias/getSunatDatos/{ruc}', [LicenciaController::class, 'getSuna
 
 Route::resource('licencias', LicenciaController::class);
 
-/* Route::post('registrarlicencia', [LicController::class, 'registrarLic'])->name('registrarLic'); */
-
 /* LISTA USUARIOS */
-Route::get('lUsuario', [UserController::class, 'show'])->name('User.show');
+Route::get('lista/usuario', [UserController::class, 'show'])->name('User.show');
 /* AGREGAR USUARIOS */
-Route::get('aUsuario', [UserController::class, 'index'])->name('User.index');
-Route::post('aUsuario', [UserController::class, 'create'])->name('User.create');
+Route::get('agregar/usuario', [UserController::class, 'index'])->name('User.index');
+Route::post('agregar/usuario', [UserController::class, 'create'])->name('User.create');
 /* ACTUALIZACIÓN USUARIOS */
-Route::get('editUsuario/{id}', [UserController::class, 'edit'])->name('User.edit');
-Route::post('updateUsuario/{id}', [UserController::class, 'update'])->name('User.update');
+Route::get('editusuario/{id}', [UserController::class, 'edit'])->name('User.edit');
+Route::post('updateusuario/{id}', [UserController::class, 'update'])->name('User.update');
 /* ELIMINAR USUARIOS */
-Route::delete('destroyUsuario/{id}', [UserController::class, 'destroy'])->name('User.destroy');
+Route::delete('destroyusuario/{id}', [UserController::class, 'destroy'])->name('User.destroy');
 
 /* ROLES Y PRIVILEGIOS */
 Route::get('ryp', [RolController::class, 'index'])->name('Role.index');
-Route::get('rolEdit/{id}', [RolController::class, 'edit'])->name('Role.edit');
-Route::post('rolUpdate/{id}', [RolController::class, 'update'])->name('Role.update');
+Route::get('roledit/{id}', [RolController::class, 'edit'])->name('Role.edit');
+Route::post('rolupdate/{id}', [RolController::class, 'update'])->name('Role.update');
 
 /* Route::post('/home', 'LicController@registrarLic'); */
+Route::get('sweet', [PdfController::class, 'watch'])->name('sweet');
 
 Auth::routes(['register' => false,
 /* 'reset' => false,

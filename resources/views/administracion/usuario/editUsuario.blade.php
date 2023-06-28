@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ url('/updateUsuario/'.$user->id) }}" method="post" autocomplete="off">
+                    <form action="{{ url('/updateusuario/'.$user->id) }}" method="post" autocomplete="off">
                         @csrf
                         <div class="card-body">                                
                             <div class="row "> 
@@ -35,24 +35,9 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {{-- DOC --}} 
-                                            <label for="">DOC. NACIONAL IDENTIDAD</label>                                      
-                                            <x-adminlte-input type="text" name="numDocument" id="numDocument" value="{{$user->numDocument}}" placeholder="Ingrese documento" label-class="text-lightblue">
-                                                <x-slot name="prependSlot">
-                                                    <div class="input-group-text">
-                                                        <i class="fas fa-id-card text-dark"></i>
-                                                    </div>
-                                                </x-slot>
-                                            </x-adminlte-input>  
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
                                             {{-- APELLIDOS --}}
-                                            <label for="">APELLIDOS</label>                                       
-                                            <x-adminlte-input type="text" name="lastname" id="lastname" value="{{$user->lastname}}" placeholder="Ingrese apellidos" label-class="text-lightblue">
+                                            <label for="">APELLIDOS</label>
+                                            <x-adminlte-input type="text" required name="lastname" id="lastname" value="{{$user->lastname}}" placeholder="Ingrese apellidos" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
                                                     <div class="input-group-text">
                                                         <i class="fas fa-user text-dark"></i>
@@ -65,15 +50,30 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {{-- CORREO --}}
-                                            <label for="">CORREO</label>                                       
-                                            <x-adminlte-input type="email" name="email" id="email" value="{{$user->email}}" placeholder="Ingrese correo" label-class="text-lightblue">
+                                            {{-- DOC --}} 
+                                            <label for="">DOC. NACIONAL IDENTIDAD</label>                                      
+                                            <x-adminlte-input type="number" required name="numDocument" id="numDocument" value="{{$user->numDocument}}" placeholder="Ingrese documento" label-class="text-lightblue">
                                                 <x-slot name="prependSlot">
                                                     <div class="input-group-text">
-                                                        <i class="fas fa-envelope text-dark"></i>
+                                                        <i class="fas fa-id-card text-dark"></i>
                                                     </div>
                                                 </x-slot>
-                                            </x-adminlte-input>  
+                                            </x-adminlte-input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {{-- CORREO --}} 
+                                            <label for="">CORREO</label>                                      
+                                            <x-adminlte-input type="email" required name="email" id="email" value="{{$user->email}}" placeholder="Ingrese Correo" label-class="text-lightblue">
+                                                <x-slot name="prependSlot">
+                                                    <div class="input-group-text">
+                                                    <i class="fas fa-envelope text-dark"></i>
+                                                    </div>
+                                                </x-slot>
+                                            </x-adminlte-input>
                                         </div>
                                     </div>
                                 </div>

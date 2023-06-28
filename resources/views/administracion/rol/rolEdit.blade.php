@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ url('/rolUpdate/'.$users->id) }}" method="post" autocomplete="off">
+                    <form action="{{ url('/rolupdate/'.$users->id) }}" method="post" autocomplete="off">
                         @csrf
                         <div class="card-body">                                
                             <div class="row "> 
@@ -76,16 +76,6 @@
                                     </div>
                                 </div>
                                 @endforeach
-                                <!-- <label>
-                                    @foreach ($roles as $rol)
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" name="roles" id="roles" value="{{ $rol->id }}" checked>
-                                        {{ $rol->name }}
-                                        </label>
-                                    </div>
-                                    @endforeach
-                                </label> -->
                             </div>
                         </div>
                         <div class="col-md-12">

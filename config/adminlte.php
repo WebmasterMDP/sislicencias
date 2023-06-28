@@ -316,7 +316,7 @@ return [
                     'url' => 'licencias/show',
                 ],
                 [
-                    'text' => 'Anulaciones',
+                    'text' => 'Licencias Anuladas',
                     'url' => 'licencias/anulaciones',
                     'icon' => 'fas fa-fw fa-ban',
                 ],
@@ -329,13 +329,13 @@ return [
             'can'     => 'User.index',
             'submenu' => [
                 [
-                    'text' => 'Usuario',
-                    'url'  => 'aUsuario',
+                    'text' => 'Registrar Usuario',
+                    'url'  => 'agregar/usuario',
                     'can'  => 'User.index',
                 ],
                 [
-                    'text' => 'Lista Usuarios',
-                    'url'  => 'lUsuario',
+                    'text' => 'Lista de Usuarios',
+                    'url'  => 'lista/usuario',
                     'can'  => 'User.show',
                 ],
                 [
@@ -345,7 +345,7 @@ return [
                 ],
                 [
                     'text' => 'Habilitaciones',
-                    'url'  => 'lHabilitacion',
+                    'url'  => 'listahabilitacion',
                     'can'  => 'Role.index',
                 ],
             ],
@@ -554,12 +554,17 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'asset' => true,
+                    'location' => 'vendor/sweetalert2/sweetalert2.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css',
                 ],
             ],
         ],
