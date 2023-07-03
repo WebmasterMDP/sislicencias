@@ -42,6 +42,12 @@ Route::get('licencias/fpdf/{id}', [LicenciaController::class, 'fpdfLicencia'])->
 Route::get('licencias/print/{id}', [LicenciaController::class, 'anulacionPrint'])->name('print');
 Route::get('licencias/getSunatDatos/{ruc}', [LicenciaController::class, 'getSunatDatos'])->name('getSunatDatos');;
 
+Route::get('licencias/sector', [LicenciaController::class, 'indexSector'])->name('sector');
+Route::get('licencias/giro', [LicenciaController::class, 'indexGiro'])->name('giro');
+
+Route::post('licencias/sector', [LicenciaController::class, 'addSector'])->name('sector');
+Route::post('licencias/giro', [LicenciaController::class, 'addGiro'])->name('giro');
+
 Route::resource('licencias', LicenciaController::class);
 
 /* LISTA USUARIOS */

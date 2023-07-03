@@ -320,6 +320,14 @@ return [
                     'url' => 'licencias/anulaciones',
                     'icon' => 'fas fa-fw fa-ban',
                 ],
+                [
+                    'text' => 'Agregar Sector',
+                    'url' => 'licencias/sector',
+                ],
+                [
+                    'text' => 'Agregar Giro',
+                    'url' => 'licencias/giro',
+                ],
             ],
         ],
 

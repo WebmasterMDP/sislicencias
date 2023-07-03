@@ -65,7 +65,7 @@
                                                     <div class="col-md-12">
                                                         {{-- Expediente --}}
                                                         <label for="">EXPEDIENTE</label>                                    
-                                                        <x-adminlte-input type="text" name="expediente" id="expediente" required placeholder="Expediente" label-class="text-lightblue">
+                                                        <x-adminlte-input type="text" name="expediente" id="expediente"  placeholder="Expediente" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
@@ -512,7 +512,7 @@
                                                     <div class="col-md-12">
                                                         {{-- IMPORTE --}}
                                                         <label for="">IMPORTE</label>  
-                                                        <x-adminlte-input name="importe" id="importe" required disabled placeholder="Ingrese importe" label-class="text-lightblue">
+                                                        <x-adminlte-input name="importe" id="importe" required placeholder="Ingrese importe" label-class="text-lightblue" readonly="readonly">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-coins text-dark"></i>
@@ -568,7 +568,6 @@
 
         var combo = document.getElementById('nivelRiesgo');
         var opcion = combo.value;
-        
         
         document.getElementById('importe').value = nriesgo[opcion][0];
 

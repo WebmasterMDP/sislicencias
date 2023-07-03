@@ -110,18 +110,29 @@
                                             @endif
                                             <td> <br>
 
-                                            @if ( $showRegistro->estado == 0 && $showRegistro->print == 1)
-                                                <a href="#" data-href="{{ url('licencias/desanular/'.$showRegistro->id) }}" data-toggle="modal" data-target="#modalDesanular" class="btn btn-success" data-placement="top" title="Desanular Registro">
+                                            @if ( $showRegistro->estado == 1 && $showRegistro->print == 1)
+                                                <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
                                                     <span class="fas fa-check-circle"></span>
-                                                </a>  
+                                                </button> 
                                                 <a href="#" data-href="{{ url('licencias/desPrint/'.$showRegistro->id) }}" data-toggle="modal" data-target="#modalDesPrint" class="btn btn-info" data-placement="top" title="Habilitar Impresion">
                                                     <span class="fas fa-print"></span>
                                                 </a>
-                                                <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
+                                                <a href="#" data-href="{{ url('licencias/anular/'.$showRegistro->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete" data-placement="top" title="Anular registro">
                                                     <span class="fas fa-ban"></span>
-                                                </button>
+                                                </a>
 
-                                            @elseif ( $showRegistro->estado == 0 && $showRegistro->print != 1 )
+                                            @elseif ( $showRegistro->estado == 1 && $showRegistro->print == 0 )
+                                                <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
+                                                    <span class="fas fa-check-circle"></span>
+                                                </button>
+                                                <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
+                                                    <span class="fas fa-print"></span>
+                                                </button>
+                                                <a href="#" data-href="{{ url('licencias/anular/'.$showRegistro->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete" data-placement="top" title="Anular registro">
+                                                    <span class="fas fa-ban"></span>
+                                                </a>
+
+                                            @elseif ( $showRegistro->estado == 0 && $showRegistro->print == 0)
                                                 <a href="#" data-href="{{ url('licencias/desanular/'.$showRegistro->id) }}" data-toggle="modal" data-target="#modalDesanular" class="btn btn-success" data-placement="top" title="Desanular Registro">
                                                     <span class="fas fa-check-circle"></span>
                                                 </a>
@@ -132,16 +143,16 @@
                                                     <span class="fas fa-ban"></span>
                                                 </button>
                                             
-                                            @elseif ( $showRegistro->estado != 0 && $showRegistro->print == 1 )
-                                                <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
+                                            @elseif ( $showRegistro->estado == 0 && $showRegistro->print == 1 )
+                                                <a href="#" data-href="{{ url('licencias/desanular/'.$showRegistro->id) }}" data-toggle="modal" data-target="#modalDesanular" class="btn btn-success" data-placement="top" title="Desanular Registro">
                                                     <span class="fas fa-check-circle"></span>
-                                                </button>
+                                                </a>
                                                 <a href="#" data-href="{{ url('licencias/desPrint/'.$showRegistro->id) }}" class="btn btn-info" data-toggle="modal" data-target="#modalDesPrint" data-placement="top" title="Habilitar Impresion">
                                                     <span class="fas fa-print"></span>
                                                 </a>
-                                                <a href="#" data-href="{{ url('licencias/anular/'.$showRegistro->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete" data-placement="top" title="Anular registro">
-                                                        <span class="fas fa-ban"></span>
-                                                </a>
+                                                <button href="#" class="btn btn-secondary" data-toggle="tooltip"  data-placement="top" title="Imprimir">
+                                                    <span class="fas fa-ban"></span>
+                                                </button>
 <!--                                                 <a href="{{ url('licencias/anular/'.$showRegistro->id) }}" data-href="" class="btn btn-danger" data-placement="top" title="Desanular Registro">
                                                     <span class="fas fa-ban"></span>
                                                 </a> -->
@@ -243,12 +254,66 @@
 @stop
 
 @section('js')
+
+@if(session('desanular') == 'ok')
+    <script>
+        Swal.fire(
+        'Exito!',
+        'Se desanulo la licencia',
+        'success'
+        )
+    </script>
+@endif
+
+
+@if(session('print') == 'ok')
+    <script>
+        Swal.fire(
+        'Exito!',
+        'Se habilito la impresión',
+        'success'
+        )
+    </script>
+@endif
+
+@if(session('anular') == 'ok')
+    <script>
+        Swal.fire(
+        'Exito!',
+        'Se anulo correctamente',
+        'success'
+        )
+    </script>
+@endif
+
+@if(session('error') == 'fail')
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title:'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+        })  
+    </script>
+@endif
+
+@if(session('reason') == 'miss')
+    <script>
+        Swal.fire(
+            'No ingreso motivo!',
+            'No procedio la solicitud',
+            'warning'
+        )
+    </script>
+@endif
+
 <script>
     $('#modalDesanular').on('show.bs.modal', function(e) {
         deanulaRegistro.setAttribute('action', $(e.relatedTarget).data('href'));        
            
         $('.btn-ok').on('click', function(e) {
             deanulaRegistro.submit();
+
         });
     });
    

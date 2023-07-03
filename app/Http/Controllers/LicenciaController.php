@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Licencia;
 use App\Models\Seguimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Registro;
 use App\Models\Sector;
 use App\Models\Giro;
@@ -51,49 +52,87 @@ class LicenciaController extends Controller
      */
     public function store(Request $request)
     {       
+        $validate = Validator::make($request->all(), [
+            'vigencia' => 'required',
+            'natJurid' => 'required',
+            'expediente' => 'required|min:5',
+            'asunto' => 'required',
+            'fechaExped' => 'required',
+            'apeNombre' => 'required',
+            'resolucion' => 'required',
+            'ruc' => 'required|min:11',
+            'telefono' => 'required|min:9',
+            'dni' => 'required',
+            'repLegal' => 'required',
+            'dniRepLegal' => 'required',
+            'dirEstable' => 'required',
+            'nomComercial' => 'required',
+            'numero' => 'required',
+            'int' => 'required',
+            'manzana' => 'required',
+            'lote' => 'required',
+            'cSect' => 'required',
+            'sector' => 'required',
+            'zona' => 'required',
+            'area' => 'required',
+            'nivelRiesgo' => 'required',
+            'zonificacion' => 'required',
+            'giroEstable' => 'required',
+            'estable' => 'required',
+            'observacion' => 'required',
+            'reciboPago' => 'required',
+            'fechaPago' => 'required',
+            'importe' => 'required',
+        ],[
+            'expediente.required' => 'Ingrese datos solicitados',
+            'expediente.min' => 'Ingrese 5 caracteres como mínimo',   
+        ]);
 
-        try {
-            $datosLicencia = $request->except('_token', 'btnRegistrar');
-            $consultaCodigoAnt = Licencia::select('id','codLicencia','periodo')                                            
-                                            ->orderBy('id', 'desc')
-                                            ->first();
-        
-            if(empty($consultaCodigoAnt) || empty($consultaCodigoAnt->id) || empty($consultaCodigoAnt->periodo)) {
+        if($validate->fails()){
+            return back()->withErrors($validate->errors())->withInput();
 
-                $codLicencia = array('codLicencia' => '0001-'.date('Y'),
-                                'periodo' => date('Y'));
-                $registroLicencia = array_merge($codLicencia, $datosLicencia);            
-                
-            }else {
-                if ($consultaCodigoAnt->periodo != date('Y') ) {
+        }else{
 
-                    $codLicencia = array('codLicencia' => '0001-'.date('Y') ,
-                                'periodo' =>  date('Y')); 
-                    $registroLicencia = array_merge($codLicencia, $datosLicencia);
-                
+            try {
+                $datosLicencia = $request->except('_token', 'btnRegistrar');
+                $consultaCodigoAnt = Licencia::select('id','codLicencia','periodo')                                            
+                                                ->orderBy('id', 'desc')
+                                                ->first();
+            
+                if(empty($consultaCodigoAnt) || empty($consultaCodigoAnt->id) || empty($consultaCodigoAnt->periodo)) {
+    
+                    $codLicencia = array('codLicencia' => '0001-'.date('Y'),
+                                    'periodo' => date('Y'));
+                    $registroLicencia = array_merge($codLicencia, $datosLicencia);            
+                    
                 }else {
-                    /* $codLicencia = array('codLicencia' => '000'.$consultaCodigoAnt->id+(1).'-'.$consultaCodigoAnt->periodo,
-                                    'periodo' => date('Y'));*/  
-                    /* $generarCodigoLicencia = substr($consultaCodigoAnt->codLicencia, 2) + 1; */
-                    $generarCodigoLicencia = substr($consultaCodigoAnt->codLicencia, 0, 4) + 1;
-                    $codLicencia = array('codLicencia' => '000'.$generarCodigoLicencia.'-'.$consultaCodigoAnt->periodo,
-                                        'periodo' => date('Y'));
-
-                    $registroLicencia = array_merge($codLicencia, $datosLicencia);               
-                }           
-                
+                    if ($consultaCodigoAnt->periodo != date('Y') ) {
+    
+                        $codLicencia = array('codLicencia' => '0001-'.date('Y') ,
+                                    'periodo' =>  date('Y')); 
+                        $registroLicencia = array_merge($codLicencia, $datosLicencia);
+                    
+                    }else {
+                        /* $codLicencia = array('codLicencia' => '000'.$consultaCodigoAnt->id+(1).'-'.$consultaCodigoAnt->periodo,
+                                        'periodo' => date('Y'));*/  
+                        /* $generarCodigoLicencia = substr($consultaCodigoAnt->codLicencia, 2) + 1; */
+                        $generarCodigoLicencia = substr($consultaCodigoAnt->codLicencia, 0, 4) + 1;
+                        $codLicencia = array('codLicencia' => '000'.$generarCodigoLicencia.'-'.$consultaCodigoAnt->periodo,
+                                            'periodo' => date('Y'));
+    
+                        $registroLicencia = array_merge($codLicencia, $datosLicencia);               
+                    }           
+                    
+                }
+                /* Licencia::insert($registroLicencia); */
+                Licencia::create($registroLicencia);
+                return redirect('licencias/show')->with('success', 'Licencia registrada correctamente');
+    
+            } catch (\Throwable $th) {
+                /* return redirect('licencias/show')->with('error', 'Error al registrar la licencia, contácte con la Oficina de Gobierno Digital');  */ 
+                return redirect('licencias/show')->with('error', $th->getMessage());          
             }
-            /* Licencia::insert($registroLicencia); */
-            Licencia::create($registroLicencia);
-            return redirect('licencias/show')->with('success', 'Licencia registrada correctamente');
-
-        } catch (\Throwable $th) {
-            /* return redirect('licencias/show')->with('error', 'Error al registrar la licencia, contácte con la Oficina de Gobierno Digital');  */ 
-            return redirect('licencias/show')->with('error', $th->getMessage());          
         }
-        
-        
-
         /* return response()->json($registroLicencia);      */   
     }
 
@@ -136,10 +175,54 @@ class LicenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosLicencia = $request->except(['_token','_method','btnRegistrar']);
-        Licencia::where('id',$id)->update($datosLicencia);
-        /* var_dump($datosLicencia); */
-        return redirect('licencias/visualizar');
+        $validate = Validator::make($request->all(),
+        [
+            'vigencia' => 'required',
+            'natJurid' => 'required',
+            'expediente' => 'required|min:5',
+            'asunto' => 'required',
+            'fechaExped' => 'required',
+            'apeNombre' => 'required',
+            'resolucion' => 'required',
+            'ruc' => 'required|min:11|max:11',
+            'telefono' => 'required|min:9',
+            'dni' => 'required',
+            'repLegal' => 'required',
+            'dniRepLegal' => 'required',
+            'dirEstable' => 'required',
+            'nomComercial' => 'required',
+            'numero' => 'required',
+            'int' => 'required',
+            'manzana' => 'required',
+            'lote' => 'required',
+            'cSect' => 'required',
+            'sector' => 'required',
+            'zona' => 'required',
+            'area' => 'required',
+            'nivelRiesgo' => 'required',
+            'zonificacion' => 'required',
+            'giroEstable' => 'required',
+            'estable' => 'required',
+            'observacion' => 'required',
+            'reciboPago' => 'required',
+            'fechaPago' => 'required',
+            'importe' => 'required',
+        ],[
+            'expediente.required' => 'Ingrese datos solicitados',
+            'expediente.min' => 'Ingrese 5 caracteres como mínimo',   
+        ]);
+
+        if($validate->fails()){
+            return back()->withErrors($validate->errors())->withInput();
+
+        }else{
+
+            $datosLicencia = $request->except(['_token','_method','btnRegistrar']);
+            Licencia::where('id',$id)->update($datosLicencia);
+            /* var_dump($datosLicencia); */
+            return redirect('licencias/visualizar');
+
+        }
     }
 
     /**
@@ -148,13 +231,17 @@ class LicenciaController extends Controller
      * @param  \App\Models\Licencia  $licencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id/* Licencia $licencia */)
-    {
+    public function destroy(){   
+        
+        $id = request('id');
+        $usuario = auth()->user()->username;
+
         $seguimiento = new Seguimiento();
         $seguimiento->licencia_id = $id;
         $seguimiento->estado = request('estado');
         $seguimiento->print = request('print');
         $seguimiento->observacion = request('razon');
+        $seguimiento->usuario = $usuario;
         $seguimiento->save();
         try {
 
@@ -193,11 +280,31 @@ class LicenciaController extends Controller
         return "ok"; /* $anulacionPrint; *//* view('pdf/anulacion', compact('showDatosLicencia')); */
     }
 
+    public function indexSector(){
+
+        return view('administracion/sector');
+    }
+
+    public function indexGiro(){
+
+        return view('administracion/giro');
+    }
+
+    public function addSector(){
+
+
+        return redirect()->route('sector');
+    }
+
+    public function addGiro(){
+        
+
+        return redirect()->route('giro');
+    }
+
     public function habilitacion()
     {
         $showRegistros = Licencia::select('*')
-                            ->where(['estado' => '0'])
-                            ->orWhere(['print' => '1'])
                             ->orderBy('id', 'desc')
                             ->get();
 
@@ -206,66 +313,87 @@ class LicenciaController extends Controller
 
     public function desAnulacion($id)
     {
-        if(request('razon')==null){
-
-            return redirect('listahabilitacion')->with('success','Ingrese el motivo por el cual desea desanular');
-            
+        $razon = request('razon');
+        if($razon == null){
+            return redirect()->route('habilitaciones')->with('reason', 'miss');
         }else{
-            
-        Licencia::where(['id' => $id])
-                ->update(['estado' => '1']);
+            try{ 
+                Licencia::where(['id' => $id])
+                        ->update(['estado' => '1']);
+                $usuario = auth()->user()->username;
 
-            $usuario = auth()->user()->username;
+                $seguimiento = new Seguimiento();
+                $seguimiento->licencia_id = $id;
+                $seguimiento->estado = '1';
+                $seguimiento->print = request('print');
+                $seguimiento->observacion = request('razon');
+                $seguimiento->usuario = $usuario;
+                $seguimiento->save();
 
-            $seguimiento = new Seguimiento();
-            $seguimiento->licencia_id = $id;
-            $seguimiento->estado = '1';
-            $seguimiento->print = request('print');
-            $seguimiento->observacion = request('razon');
-            $seguimiento->usuario = $usuario;
+                return redirect()->route('habilitaciones')->with('desanular', 'ok');
 
-            $seguimiento->save();
-
-        return redirect('listahabilitacion');
+            } catch (\Throwable $th) {
+                return redirect()->route('habilitaciones')->with('error', 'fail');
+            }
         }
     }
 
     public function anulacion($id)
     {
-        Licencia::where(['id' => $id])
-                ->update(['estado' => '0']);
+        $razon = request('razon');
+        if($razon == null){
+            return redirect()->route('habilitaciones')->with('reason', 'miss');
+        }else{
+            try{
+                Licencia::where(['id' => $id])
+                        ->update(['estado' => '0']);
+                $usuario = auth()->user()->username;
 
-            $usuario = auth()->user()->username;
+                $seguimiento = new Seguimiento();
+                $seguimiento->licencia_id = $id;
+                $seguimiento->estado = '0';
+                $seguimiento->print = request('print');
+                $seguimiento->observacion = request('razon');
+                $seguimiento->usuario = $usuario; 
+                $seguimiento->save();
+                                
+                return redirect()->route('habilitaciones')->with('anular', 'ok');
 
-            $seguimiento = new Seguimiento();
-            $seguimiento->licencia_id = $id;
-            $seguimiento->estado = '0';
-            $seguimiento->print = request('print');
-            $seguimiento->observacion = request('razon');
-            $seguimiento->usuario = $usuario;
-            
-            $seguimiento->save();
-                            
-        return redirect('listahabilitacion');
+                } catch (\Throwable $th) {
+
+                return redirect()->route('habilitaciones')->with('error', 'fail');
+            }
+        }
+        
     }
 
     public function desAnulacionPrint($id)
     {
-        Licencia::where(['id' => $id])
-                ->update(['print' => '0']);
+        $razon = request('razon');
+        if($razon == null){
+            return redirect()->route('habilitaciones')->with('reason', 'miss');
+        }else{
+            try{
+                Licencia::where(['id' => $id])
+                        ->update(['print' => '0']);
+                $usuario = auth()->user()->username;
+    
+                $seguimiento = new Seguimiento();
+                $seguimiento->licencia_id = $id;
+                $seguimiento->estado = request('estado');
+                $seguimiento->print = '0';
+                $seguimiento->observacion = request('razon');
+                $seguimiento->usuario = $usuario;
+                $seguimiento->save();
 
-            $usuario = auth()->user()->username;
-
-            $seguimiento = new Seguimiento();
-            $seguimiento->licencia_id = $id;
-            $seguimiento->estado = request('estado');
-            $seguimiento->print = '0';
-            $seguimiento->observacion = request('razon');
-            $seguimiento->usuario = $usuario;
-
-            $seguimiento->save();
-
-        return redirect('listahabilitacion');
+                return redirect()->route('habilitaciones')->with('print', 'ok');
+    
+            } catch (\Throwable $th) {
+                return redirect()->route('habilitaciones')->with('error', 'fail');
+            }  
+        }
+        
+              
     }
     public function getSunatDatos($ruc){
         $url = 'https://ws3.pide.gob.pe/Rest/Sunat/DatosPrincipales?';

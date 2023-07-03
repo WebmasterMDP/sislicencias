@@ -126,6 +126,7 @@
                                                         <span class='fas fa-edit'></span>
                                                     </a>
                                                     <a href="#" data-href="{{ url('licencias/'.$showRegistro->id) }}" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete" data-placement="top" title="Anular registro">
+<!--                                                     <a href="#" data-href="{{ url('licencias/'.$showRegistro->id) }}" class="btn btn-danger" data-placement="top" title="Anular registro"> -->
                                                         <span class="fas fa-ban"></span>
                                                     </a>
                                                 @endif
@@ -160,6 +161,7 @@
                         <input type="text" class="form-control" id="razon" name="razon" placeholder="Ingrese motivo">
                         <input type="hidden" value="{{$showRegistro->estado}}" name=estado>
                         <input type="hidden" value="{{$showRegistro->print}}" name=print>
+                        <input type="hidden" value="{{$showRegistro->id}}" name=id>
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-light" data-dismiss="modal">No</a>
@@ -198,7 +200,44 @@
         anulaRegistro.setAttribute('action', $(e.relatedTarget).data('href'));        
            
         $('.btn-ok').on('click', function(e) {
-            anulaRegistro.submit();            
+            $('#confirm-delete').modal('hide')
+            
+            const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success m-2',
+                cancelButton: 'btn btn-danger m-2'
+            },
+            buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+            title: '¿Estas seguro?',
+            text: "Se anulará definitavemnte",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, anular',
+            cancelButtonText: 'No, cancelar',
+            reverseButtons: true
+            }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                'Anulado!',
+                'La licencia se anuló.',
+                'success'
+                )
+                anulaRegistro.submit();
+            } else if (
+                
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                'Cancelado',
+                'La licencia sigue activa',
+                'error'
+                )
+            }
+            })
+                     
         });
     });
    
@@ -232,5 +271,43 @@
        
         window.location.href = "{{ url('licencias/show')}}";
     });
+</script>
+
+<script>
+
+    /* const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+        confirmButton: 'btn btn-success m-2',
+        cancelButton: 'btn btn-danger m-2'
+    },
+    buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'No, cancel!',
+    reverseButtons: true
+    }).then((result) => {
+    if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+        )
+    } else if (
+        
+        result.dismiss === Swal.DismissReason.cancel
+    ) {
+        swalWithBootstrapButtons.fire(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+        )
+    }
+    }) */
 </script>
 @stop
