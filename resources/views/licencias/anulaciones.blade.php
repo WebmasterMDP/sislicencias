@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Licencias')
 
 @section('content_header')
 
@@ -8,7 +8,7 @@
 
 @section('content')
 <br>
-<x-adminlte-card title="LOCAL" class="m-2" theme="dark" icon="fas fa-id-card">
+<x-adminlte-card title="ANULACIONES" class="m-2" theme="dark" icon="fas fa-id-card">
     <div class="col-12">                                         
         <div class="row">
             <div class="col-12">
@@ -26,7 +26,7 @@
                                     </div>
                                 @endif
                                 <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
-                                    <thead class="text-center text-nowrap bg-secondary">
+                                    <thead class="text-center text-nowrap bg-dark">
                                         <tr>
                                             <th>N°</th>
                                             <th>COD. LICENCIA</th>

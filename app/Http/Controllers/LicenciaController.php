@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LicenciaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $sectors = Sector::orderBy('nombre', 'asc')->get();
@@ -26,11 +21,6 @@ class LicenciaController extends Controller
         return view('licencias/reglicencia', compact('sectors','giros'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function annulations()
     {
         $licenciasAnuladas = Licencia::select('*')
@@ -44,12 +34,6 @@ class LicenciaController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {       
         $validate = Validator::make($request->all(), [
@@ -60,17 +44,13 @@ class LicenciaController extends Controller
             'fechaExped' => 'required',
             'apeNombre' => 'required',
             'resolucion' => 'required',
-            'ruc' => 'required|min:11',
-            'telefono' => 'required|min:9',
-            'dni' => 'required',
+            'ruc' => 'required|min:11|max:11',
+            'telefono' => 'required|min:7',
+            'dni' => 'required|min:8',
             'repLegal' => 'required',
-            'dniRepLegal' => 'required',
+            'dniRepLegal' => 'required|min:8',
             'dirEstable' => 'required',
             'nomComercial' => 'required',
-            'numero' => 'required',
-            'int' => 'required',
-            'manzana' => 'required',
-            'lote' => 'required',
             'cSect' => 'required',
             'sector' => 'required',
             'zona' => 'required',
@@ -84,14 +64,18 @@ class LicenciaController extends Controller
             'fechaPago' => 'required',
             'importe' => 'required',
         ],[
-            'expediente.required' => 'Ingrese datos solicitados',
-            'expediente.min' => 'Ingrese 5 caracteres como mínimo',   
+            'required' => 'Ingrese datos solicitados',
+            'expediente.min' => 'Ingrese 5 caracteres como mínimo',
+            'telefono.min' => 'Ingrese 7 caracateres como mínimo',
+            'ruc.min' => 'Ingrese 11 carateres como mínimo',
+            'dni.min' => 'Ingrese 8 carateres como mínimo',
+            'dniRepLegal.min' => 'Ingrese 8 carateres como mínimo',
+            'ruc.max' => 'Ingrese 11 carateres como maximo',
         ]);
 
         if($validate->fails()){
-            return back()->withErrors($validate->errors())->withInput();
-
-        }else{
+            return back()->withErrors($validate->errors())->withInput()->with('licencia', 'miss');
+        }else{  
 
             try {
                 $datosLicencia = $request->except('_token', 'btnRegistrar');
@@ -126,22 +110,17 @@ class LicenciaController extends Controller
                 }
                 /* Licencia::insert($registroLicencia); */
                 Licencia::create($registroLicencia);
-                return redirect('licencias/show')->with('success', 'Licencia registrada correctamente');
+                return redirect('licencias/show')->with('licencia', 'ok');
     
             } catch (\Throwable $th) {
                 /* return redirect('licencias/show')->with('error', 'Error al registrar la licencia, contácte con la Oficina de Gobierno Digital');  */ 
-                return redirect('licencias/show')->with('error', $th->getMessage());          
+                return redirect('licencias/show')->with('error', $th->getMessage());
+                /* return redirect('licencias/show')->with('licencia', 'error'); */
             }
         }
         /* return response()->json($registroLicencia);      */   
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Licencia  $licencia
-     * @return \Illuminate\Http\Response
-     */
     public function show(/* Licencia $licencia */)
     {
         $showRegistros = Licencia::select('*')
@@ -152,12 +131,6 @@ class LicenciaController extends Controller
         return view('licencias/visualizar', compact('showRegistros'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Licencia  $licencia
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $licencia = Licencia::where('id',$id)->first();
@@ -166,13 +139,6 @@ class LicenciaController extends Controller
         return view('licencias/editar', compact('licencia', 'giros', 'sectors'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Licencia  $licencia
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $validate = Validator::make($request->all(),
@@ -191,10 +157,6 @@ class LicenciaController extends Controller
             'dniRepLegal' => 'required',
             'dirEstable' => 'required',
             'nomComercial' => 'required',
-            'numero' => 'required',
-            'int' => 'required',
-            'manzana' => 'required',
-            'lote' => 'required',
             'cSect' => 'required',
             'sector' => 'required',
             'zona' => 'required',
@@ -208,8 +170,8 @@ class LicenciaController extends Controller
             'fechaPago' => 'required',
             'importe' => 'required',
         ],[
-            'expediente.required' => 'Ingrese datos solicitados',
-            'expediente.min' => 'Ingrese 5 caracteres como mínimo',   
+            'required' => 'Ingrese datos solicitados',
+            'expediente.min' => 'Ingrese 5 caracteres como mínimo',
         ]);
 
         if($validate->fails()){
@@ -225,12 +187,6 @@ class LicenciaController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Licencia  $licencia
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(){   
         
         $id = request('id');
@@ -278,28 +234,6 @@ class LicenciaController extends Controller
                                        ->update(['print' => '1']);
         
         return "ok"; /* $anulacionPrint; *//* view('pdf/anulacion', compact('showDatosLicencia')); */
-    }
-
-    public function indexSector(){
-
-        return view('administracion/sector');
-    }
-
-    public function indexGiro(){
-
-        return view('administracion/giro');
-    }
-
-    public function addSector(){
-
-
-        return redirect()->route('sector');
-    }
-
-    public function addGiro(){
-        
-
-        return redirect()->route('giro');
     }
 
     public function habilitacion()
@@ -354,9 +288,9 @@ class LicenciaController extends Controller
                 $seguimiento->estado = '0';
                 $seguimiento->print = request('print');
                 $seguimiento->observacion = request('razon');
-                $seguimiento->usuario = $usuario; 
+                $seguimiento->usuario = $usuario;
                 $seguimiento->save();
-                                
+                
                 return redirect()->route('habilitaciones')->with('anular', 'ok');
 
                 } catch (\Throwable $th) {
@@ -388,22 +322,26 @@ class LicenciaController extends Controller
 
                 return redirect()->route('habilitaciones')->with('print', 'ok');
     
-            } catch (\Throwable $th) {
+            }catch (\Throwable $th) {
                 return redirect()->route('habilitaciones')->with('error', 'fail');
-            }  
+            }
         }
-        
-              
     }
     public function getSunatDatos($ruc){
         $url = 'https://ws3.pide.gob.pe/Rest/Sunat/DatosPrincipales?';
 
         $response = file_get_contents($url.'numruc='.$ruc.'&out=json'); 
-        $data = json_decode($response, true);
+        $data = json_decode($response, true);   
         return response()->json($data);
 
         /* $data = json_decode($res->getBody(), true);
         return response()->json($data); */
     }
-    
+
+    public function getSector($zona){
+        $response = Sector::where(['zona' => $zona])
+                    ->get();
+
+        return $response;
+    }
 }

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Licencia')
 
 @section('content_header')
 
@@ -8,7 +8,7 @@
 
 @section('content')
 <br>
-<x-adminlte-card title="LOCAL" class="m-2" theme="dark" icon="fas fa-id-card">
+<x-adminlte-card title="LISTA DE LICENCIAS" class="m-2" theme="dark" icon="fas fa-id-card">
     <div class="col-12">                                         
         <div class="row">
             <div class="col-12">
@@ -271,43 +271,5 @@
        
         window.location.href = "{{ url('licencias/show')}}";
     });
-</script>
-
-<script>
-
-    /* const swalWithBootstrapButtons = Swal.mixin({
-    customClass: {
-        confirmButton: 'btn btn-success m-2',
-        cancelButton: 'btn btn-danger m-2'
-    },
-    buttonsStyling: false
-    })
-
-    swalWithBootstrapButtons.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Yes, delete it!',
-    cancelButtonText: 'No, cancel!',
-    reverseButtons: true
-    }).then((result) => {
-    if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire(
-        'Deleted!',
-        'Your file has been deleted.',
-        'success'
-        )
-    } else if (
-        
-        result.dismiss === Swal.DismissReason.cancel
-    ) {
-        swalWithBootstrapButtons.fire(
-        'Cancelled',
-        'Your imaginary file is safe :)',
-        'error'
-        )
-    }
-    }) */
 </script>
 @stop

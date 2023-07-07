@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Usuarios')
 
 @section('content_header')
 
@@ -142,5 +142,25 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    
+@if(session('rol') == 'update')
+    <script>
+        Swal.fire(
+        'Actualizado!',
+        'Se actualizo el rol correctamente.',
+        'success'
+        )
+    </script>
+@endif
+
+@if(session('rol') == 'fail')
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title:'Oops...',
+            text: 'Fallo el proceso',
+        })  
+    </script>
+@endif
+
 @stop

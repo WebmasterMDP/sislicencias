@@ -2,11 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LicenciaController;
+use App\Http\Controllers\ZonificacionController;
+use App\Http\Controllers\SeguimientoController;
 use App\Http\Controllers\LicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PdfController;
-
+use App\Http\Controllers\SectorController;
+use App\Http\Controllers\GiroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,16 +43,21 @@ Route::get('visualizar', [LicenciaController::class, 'show'])->name('visualizar.
 Route::get('licencias/anulaciones', [LicenciaController::class, 'annulations'])->name('anulaciones');
 Route::get('licencias/fpdf/{id}', [LicenciaController::class, 'fpdfLicencia'])->name('fpdfLicencia');
 Route::get('licencias/print/{id}', [LicenciaController::class, 'anulacionPrint'])->name('print');
+
 Route::get('licencias/getSunatDatos/{ruc}', [LicenciaController::class, 'getSunatDatos'])->name('getSunatDatos');;
+Route::get('licencias/getSector/{zona}', [LicenciaController::class, 'getSector'])->name('getSector');;
 
-Route::get('licencias/sector', [LicenciaController::class, 'indexSector'])->name('sector');
-Route::get('licencias/giro', [LicenciaController::class, 'indexGiro'])->name('giro');
+Route::get('licencias/sector', [SectorController::class, 'index'])->name('sector');
+Route::get('licencias/giro', [GiroController::class, 'index'])->name('giro');
+Route::get('licencias/zonificacion', [ZonificacionController::class, 'index'])->name('zonificacion');
 
-Route::post('licencias/sector', [LicenciaController::class, 'addSector'])->name('sector');
-Route::post('licencias/giro', [LicenciaController::class, 'addGiro'])->name('giro');
+Route::post('licencias/sector', [SectorController::class, 'create'])->name('create.sector');
+Route::post('licencias/giro', [GiroController::class, 'create'])->name('create.giro');
+Route::post('licencias/zonificacion', [ZonificacionController::class, 'create'])->name('create.zonificacion');
 
 Route::resource('licencias', LicenciaController::class);
 
+Route::get('seguimiento', [SeguimientoController::class, 'index'])->name('seguimiento');
 /* LISTA USUARIOS */
 Route::get('lista/usuario', [UserController::class, 'show'])->name('User.show');
 /* AGREGAR USUARIOS */

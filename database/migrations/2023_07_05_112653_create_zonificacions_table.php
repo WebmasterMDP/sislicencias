@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sectors', function (Blueprint $table) {
+        Schema::create('zonificacions', function (Blueprint $table) {
             $table->id();
-
-            $table->string('codSector');
-            $table->string('nombre');
-            $table->string('zona');
-            $table->string('observacion');
-            $table->string('usuario');
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sectors');
+        Schema::dropIfExists('zonificacions');
     }
 };

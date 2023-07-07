@@ -109,7 +109,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/escudo.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -321,12 +321,16 @@ return [
                     'icon' => 'fas fa-fw fa-ban',
                 ],
                 [
-                    'text' => 'Agregar Sector',
+                    'text' => 'Lista de Sectores',
                     'url' => 'licencias/sector',
                 ],
                 [
-                    'text' => 'Agregar Giro',
+                    'text' => 'Lista de Giros',
                     'url' => 'licencias/giro',
+                ],
+                [
+                    'text' => 'Lista de Zonificaiones',
+                    'url' => 'licencias/zonificacion',
                 ],
             ],
         ],
@@ -355,6 +359,11 @@ return [
                     'text' => 'Habilitaciones',
                     'url'  => 'listahabilitacion',
                     'can'  => 'Role.index',
+                ],
+                [
+                    'text' => 'Seguimientos',
+                    'url'  => 'seguimiento',
+                    'can'  => 'User.index',
                 ],
             ],
         ],

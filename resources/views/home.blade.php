@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Home')
 
 @section('content_header')
 
@@ -105,7 +105,7 @@
                 </div>
                 <div class="modal-body">
                     <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
-                        <thead class="text-center text-nowrap bg-info ">
+                        <thead class="text-center text-nowrap bg-dark ">
                             <tr>
                                 <th>ID</th>
                                 <th>Codigo Licencia</th>
@@ -146,7 +146,7 @@
                 </div>
                 <div class="modal-body">
                     <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
-                        <thead class="text-center text-nowrap bg-info ">
+                        <thead class="text-center text-nowrap bg-dark ">
                             <tr>
                                 <th>Codigo Licencia</th>
                                 <th>Periodo</th>
@@ -185,7 +185,7 @@
                 </div>
                 <div class="modal-body">
                     <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
-                        <thead class="text-center text-nowrap bg-info ">
+                        <thead class="text-center text-nowrap bg-dark ">
                             <tr>
                                 <th>Codigo Licencia</th>
                                 <th>Periodo</th>
@@ -224,7 +224,7 @@
                 </div>
                 <div class="modal-body">
                     <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1_info">
-                        <thead class="text-center text-nowrap bg-info ">
+                        <thead class="text-center text-nowrap bg-dark ">
                             <tr>
                                 <th>Codigo Licencia</th>
                                 <th>Periodo</th>

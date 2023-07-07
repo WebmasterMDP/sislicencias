@@ -14,72 +14,27 @@ class SectorController extends Controller
      */
     public function index()
     {
-        //
+        $sectors = Sector::orderBy('nombre', 'asc')->get();
+
+        return view('administracion/sector', compact('sectors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
-    }
+        try{
+        $usuario = auth()->user()->username;
+        $datos = new Sector();
+        $datos->codSector = request('codSector');
+        $datos->nombre = request('nombre');
+        $datos->zona = request('zona');
+        $datos->usuario = $usuario;
+        $datos->save();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        return redirect()->route('sector')->with('sector', 'ok');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Sector  $sector
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Sector $sector)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Sector  $sector
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Sector $sector)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sector  $sector
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Sector $sector)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Sector  $sector
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Sector $sector)
-    {
-        //
+        } catch (\Throwable $th) {
+            
+            return redirect()->route('sector')->with('sector', 'fail');
+        }
     }
 }

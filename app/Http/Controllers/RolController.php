@@ -27,6 +27,7 @@ class RolController extends Controller
     
     public function update(Request $request, User $user, $id)
     {
+        try{
         $datosUser = $request->except(['_token','_method']);
         User::where('id',$id)->update($datosUser);
 
@@ -34,7 +35,13 @@ class RolController extends Controller
         $user = User::findOrFail($id);
         $user->roles()->sync($request->rol);
         
-        return redirect('ryp');
+        return redirect()->route('Role.index')->with('rol', 'update');
+
+        } catch (\Throwable $th) {
+            
+            return redirect()->route('Role.index')->with('rol', 'fail');
+
+        }
     }
 
 }

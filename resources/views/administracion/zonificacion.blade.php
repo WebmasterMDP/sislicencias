@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Sector')
+@section('title', 'Zonificacion')
 
 @section('content_header')
 @stop
@@ -8,9 +8,7 @@
 @section('content')
 
 <br>
-
-
-<x-adminlte-card title="LOCAL" class="m-2" theme="dark" icon="fas fa-id-card">
+<x-adminlte-card title="ZONIFICACIONES" class="m-2" theme="dark" icon="fas fa-id-card">
     <div class="col-12">                                         
         <div class="row">
             <div class="col-12">
@@ -25,19 +23,15 @@
                                 <table id="example2" class="table table-bordered table-striped dataTable dtr-inline collapsed" aria-describedby="example1">
                                     <thead class="text-center text-nowrap bg-dark ">
                                         <tr>
-                                            <th>COD SECTOR</th>
-                                            <th>SECTOR</th>
-                                            <th>ZONA</th>
+                                            <th>COD ZONIFICACION</th>
+                                            <th>ZONIFICACION</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($sectors as $sector)
                                         <tr>
-                                            <td>{{ $sector->codSector }}</td>
-                                            <td>{{ $sector->nombre }}</td>
-                                            <td>{{ $sector->zona }}</td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
-                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -49,17 +43,16 @@
     </div>
 </x-adminlte-card>
 
-
 <div class="modal fade show" id="addSector" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">REGISTRAR SECTOR</h4>
+                <h4 class="modal-title">REGISTRAR ZONIFICACION</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="{{ url('licencias/sector') }}" method="POST" autocomplete="off">
+            <form action="{{ url('licencias/zonificacion') }}" method="POST" autocomplete="off">
             @csrf
                 <div class="modal-body">
                     <div class="card-body">
@@ -75,13 +68,11 @@
                                                     <i class="fas fa-id-card text-dark"></i>
                                                 </div>
                                             </x-slot>
-
                                             <option value="-">-</option>
                                             <option value="1">1</option>
                                             <option value="3">3</option>
                                             <option value="4">4</option>
                                             <option value="5">5</option>
-
                                         </x-adminlte-select>
                                     </div>
                                 </div>
@@ -97,7 +88,7 @@
                                                     <i class="fas fa-user text-dark"></i>
                                                 </div>
                                             </x-slot>
-                                        </x-adminlte-input>  
+                                        </x-adminlte-input>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +97,7 @@
                                     <div class="col-md-12">
                                         {{-- INGRESE SECTOR --}}
                                         <label for="">INGRESE SECTOR</label>                                       
-                                        <x-adminlte-input type="text" required name="nombre" id="nombre" placeholder="Ingrese Sector" label-class="text-lightblue">
+                                        <x-adminlte-input type="text" required name="nombre" id="nombre" placeholder="Ingrese Zonificacion" label-class="text-lightblue">
                                             <x-slot name="prependSlot">
                                                 <div class="input-group-text">
                                                     <i class="fas fa-user text-dark"></i>
@@ -128,7 +119,6 @@
     </div>
 </div>
 
-
 @stop
 
 @section('css')
@@ -136,7 +126,7 @@
 
 @section('js')
 
-@if(session('sector') == 'ok')
+@if(session('zonificacion') == 'ok')
     <script>
         Swal.fire(
         'Exito!',
@@ -146,7 +136,7 @@
     </script>
 @endif
 
-@if(session('sector') == 'fail')
+@if(session('zonificacion') == 'fail')
     <script>
         Swal.fire({
             icon: 'error',

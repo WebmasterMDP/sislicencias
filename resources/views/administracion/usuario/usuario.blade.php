@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Usuario')
 
 @section('content_header')
 
@@ -123,4 +123,56 @@
 @stop
 
 @section('js')
+
+@if(session('user') == 'ok')
+    <script>
+        Swal.fire(
+        'Exito!',
+        'Se agrego correctamente',
+        'success'
+        )
+    </script>
+@endif
+
+@if(session('user') == 'fail')
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title:'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+        })  
+    </script>
+@endif
+
+@if(session('user') == 'miss')
+    <script>
+        Swal.fire(
+            'No ingreso datos validos!',
+            'No procedio la solicitud',
+            'warning'
+        )
+    </script>
+@endif
+
+
+<script>
+function validar(){
+	
+	//Almacenamos los valores
+	nombre=$('#numDocument').val();
+	
+   //Comprobamos la longitud de caracteres
+	if (nombre.length<8){
+		return true;
+	}
+	else {
+		alert('Maximo 8 caracteres');
+		return false;
+	}
+
+}
+</script>
+
+
 @stop

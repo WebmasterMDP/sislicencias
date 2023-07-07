@@ -14,15 +14,8 @@ class Sector extends Model
         'id',
         'codSector',
         'nombre',
-        'cod1',
-        'cod2',
-        'cod3',
-        'cod4',
-        'cod5',
-        'cod6',
-        'cod7',
-        'cod8',
-        'cod9',
+        'zona',
+        'usuario',
     ];
 
     /* public function lista_sector()

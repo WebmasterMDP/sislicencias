@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('licencia_id');
             $table->string('estado');
+            $table->string('print');
             $table->string('observacion');
             $table->string('usuario');
             $table->timestamps();

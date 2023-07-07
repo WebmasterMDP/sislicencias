@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Licencia')
 
 @section('content_header')
 
@@ -65,7 +65,7 @@
                                                     <div class="col-md-12">
                                                         {{-- Expediente --}}
                                                         <label for="">EXPEDIENTE</label>                                    
-                                                        <x-adminlte-input type="text" name="expediente" id="expediente"  placeholder="Expediente" label-class="text-lightblue">
+                                                        <x-adminlte-input type="text" name="expediente" id="expediente" required  placeholder="Expediente" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
@@ -173,7 +173,7 @@
                                                     <div class="col-md-12">
                                                         {{-- Telefono --}}
                                                         <label for="">TELÉFONO</label>  
-                                                        <x-adminlte-input type="number" name="telefono" id="telefono" required placeholder="Ingrese telefono" label-class="text-lightblue">
+                                                        <x-adminlte-input type="number" name="telefono" id="telefono" required minLength="7" placeholder="Ingrese telefono" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-phone-alt text-dark"></i>
@@ -186,9 +186,9 @@
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        {{-- DNI --}}
-                                                        <label for="">DNI</label>
-                                                        <x-adminlte-input type="number" name="dni" id="dni" required placeholder="Ingrese DNI" label-class="text-lightblue">
+                                                        {{-- DNI / CE --}}
+                                                        <label for="">DNI / CE</label>
+                                                        <x-adminlte-input type="number" name="dni" id="dni" required minLength="8" placeholder="Ingrese DNI" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
@@ -217,8 +217,8 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         {{-- DNI Rep Legal --}}
-                                                        <label for="">DNI - REP. LEG.</label>  
-                                                        <x-adminlte-input type="number" name="dniRepLegal" id="dniRepLegal" required placeholder="Representante Legal" label-class="text-lightblue">
+                                                        <label for="">DNI / REP. LEG.</label>  
+                                                        <x-adminlte-input type="number" name="dniRepLegal" id="dniRepLegal" required minlength="8" placeholder="Representante Legal" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
@@ -231,8 +231,6 @@
                                         </div>       
                                     </div>               
                                 </x-adminlte-card>
-
-
                                 <x-adminlte-card title="LOCAL" class="" theme="dark" icon="fas fa-id-card">
                                     <div class="col-12">                    
                                         <div class="row ">
@@ -271,7 +269,7 @@
                                                     <div class="col-md-12">
                                                         {{-- Nº --}}
                                                         <label for="">Nº</label>
-                                                        <x-adminlte-input type="number" name="numero" id="numero" required placeholder="Ingrese Nº" label-class="text-lightblue">
+                                                        <x-adminlte-input type="number" name="numero" id="numero" placeholder="Ingrese Nº" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
@@ -286,7 +284,7 @@
                                                     <div class="col-md-12">
                                                         {{-- INT --}}
                                                         <label for="">INT</label>
-                                                        <x-adminlte-input type="number" name="int" id="int" required placeholder="Ingrese int" label-class="text-lightblue">
+                                                        <x-adminlte-input type="number" name="int" id="int" placeholder="Ingrese int" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
@@ -301,7 +299,7 @@
                                                     <div class="col-md-12">
                                                         {{-- MZ --}}
                                                         <label for="">MZ</label>
-                                                        <x-adminlte-input type="text" name="manzana" id="manzana" required placeholder="Ingrese Mz." label-class="text-lightblue">
+                                                        <x-adminlte-input type="text" name="manzana" id="manzana" placeholder="Ingrese Mz." label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
@@ -316,7 +314,7 @@
                                                     <div class="col-md-12">
                                                         {{-- LT. --}}
                                                         <label for="">LT.</label>
-                                                        <x-adminlte-input type="number" name="lote" id="lote" required placeholder="Ingrese Lote" label-class="text-lightblue">
+                                                        <x-adminlte-input type="number" name="lote" id="lote" placeholder="Ingrese Lote" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
@@ -329,15 +327,22 @@
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        {{-- C.SECT. --}}
-                                                        <label for="">C.SECT.</label>
-                                                        <x-adminlte-input type="text" name="cSect" id="cSect" required placeholder="Ingrese cSect" label-class="text-lightblue">
+                                                        {{-- ZONA --}}
+                                                        <label for="">ZONA</label>
+                                                        <x-adminlte-select type="number" name="zona" id="zona" required placeholder="Ingrese zona" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
                                                                 </div>
                                                             </x-slot>
-                                                        </x-adminlte-input>  
+
+                                                            <option value="-">-</option>
+                                                            <option value="1">1</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+
+                                                        </x-adminlte-select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -352,9 +357,7 @@
                                                                     <i class="fas fa-id-card text-dark"></i>
                                                                 </div>
                                                             </x-slot>
-                                                            @foreach ($sectors as $sector)
-                                                            <option>{{ $sector->codSector }}</option>
-                                                            @endforeach
+                                                            <option value="">1</option>
                                                         </x-adminlte-select>
                                                     </div>
                                                 </div>
@@ -362,15 +365,15 @@
                                             <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        {{-- ZONA --}}
-                                                        <label for="">ZONA</label>
-                                                        <x-adminlte-input type="number" name="zona" id="zona" required placeholder="Ingrese zona" label-class="text-lightblue">
+                                                        {{-- C.SECT. --}}
+                                                        <label for="">C.SECT.</label>
+                                                        <x-adminlte-input type="text" name="cSect" id="cSect" value="" required placeholder="Ingrese cSect" label-class="text-lightblue">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-id-card text-dark"></i>
                                                                 </div>
                                                             </x-slot>
-                                                        </x-adminlte-input>
+                                                        </x-adminlte-input>  
                                                     </div>
                                                 </div>
                                             </div>
@@ -448,7 +451,7 @@
                                                     <div class="col-md-12">
                                                         {{-- 2 --}}
                                                         <label for="">ESTABLECIMIENTO</label>                                                          
-                                                        <x-adminlte-textarea type="text" name="estable" id="estable" required  placeholder="Ingrese zona" label-class="text-lightblue" readonly="readonly">
+                                                        <x-adminlte-textarea type="text" name="estable" id="estable" required  placeholder="Ingrese establecimiento" label-class="text-lightblue" readonly="readonly">
                                                             <x-slot name="prependSlot">
                                                                 <div class="input-group-text">
                                                                     <i class="fas fa-map-pin text-dark"></i>
@@ -553,110 +556,190 @@
     @stop
     
 
-    @section('js')
+@section('js')
+
+
+@if(session('licencia') == 'ok')
     <script>
-        var nriesgo = {
-        //solución, material y tiempo
-        "-- seleccione --": ["-- seleccione nivel de riesgo --"],
-        "NIVEL DE RIEGO BAJO": ["179.90"],
-        "NIVEL DE RIEGO MEDIO": ["200.90"],
-        "NIVEL DE RIEGO ALTO": ["345.90"],
-        "NIVEL DE RIEGO MUY ALTO": ["679.00"]
-        }
-
-        function cambioOpciones(){
-
-        var combo = document.getElementById('nivelRiesgo');
-        var opcion = combo.value;
-        
-        document.getElementById('importe').value = nriesgo[opcion][0];
-
-        }
+        Swal.fire(
+        'Exito!',
+        'Se agrego correctamente',
+        'success'
+        )
     </script>
+@endif
+
+@if(session('licencia') == 'fail')
     <script>
-        /* $(document).ready(function( */
-            /* document.getElementById("estable").disabled = true; */            
+        Swal.fire({
+            icon: 'error',
+            title:'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+        })  
+    </script>
+@endif
+
+@if(session('licencia') == 'miss')
+    <script>
+        Swal.fire(
+            'No ingreso datos validos!',
+            'No procedio la solicitud',
+            'warning'
+        )
+    </script>
+@endif
+
+<script>
+    $("#zona").on("change", function(){
+        
+        $("#sector").html("");
+        $("#cSect").val("");
+
+            var zona = $("#zona").val();
+            var url = "{{ route('getSector', ':zona') }}";                
+            url = url.replace(':zona', zona);
             
-            $("#giroEstable").on("change", function(){
-                var giroEstable = $(this).val();
-                var estable = $("#estable").val();
+            console.log(url);
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (response) {
+                    console.log(response['0'].nombre);
+                    response.forEach(element => {
+                        $("#sector").append("<option value='"+element.codSector+"'>"+element.nombre+"</option>");
+                        console.log(element.nombre);
+                    })
+
+                }
+            });
+            $("#sector").change(function() {
+            var valor = $(this).val(); // Capturamos el valor del select
+
+            $("#cSect").val(valor);
+            });
+        });
+</script>
+<script>
+    var nriesgo = {
+    "-- seleccione --": ["-- seleccione nivel de riesgo --"],
+    "NIVEL DE RIEGO BAJO": ["179.90"],
+    "NIVEL DE RIEGO MEDIO": ["200.90"],
+    "NIVEL DE RIEGO ALTO": ["345.90"],
+    "NIVEL DE RIEGO MUY ALTO": ["679.00"] }
+
+    function cambioOpciones(){
+
+    var combo = document.getElementById('nivelRiesgo');
+    var opcion = combo.value;
+    
+    document.getElementById('importe').value = nriesgo[opcion][0];
+
+    }
+</script>
+<script>
+    /* $(document).ready(function( */
+        /* document.getElementById("estable").disabled = true; */
+        
+        $("#giroEstable").on("change", function(){
+            var giroEstable = $(this).val();
+            var estable = $("#estable").val();
+            
+            if (estable == ""){
+                // $("#estable").val(giroEstable).appendTo($("#estable"));
+                // $("#estable").prepend(giroEstable);
+                $("#estable").val(giroEstable);
+            }else {
+                document.getElementById("estable").value = estable +' - '+ giroEstable;
                 
-                if (estable == ""){
-                    // $("#estable").val(giroEstable).appendTo($("#estable"));
-                    // $("#estable").prepend(giroEstable);
-                    $("#estable").val(giroEstable);
-                }else {
-                    document.getElementById("estable").value = estable +' - '+ giroEstable;
+            }
+        });
+
+        $("#clear").on('click', function(){
+            
+            /* $("#estable").empty(); */
+            $("#estable").val(''); 
+            $("#giroEstable").val('<?php echo $giro->nombre; ?>').first();            
+        });
+
+        $("#getSunatDatos").on("click", function(){
+            var ruc = $("#ruc").val();
+            var url = "{{ route('getSunatDatos', ':ruc') }}";                
+            url = url.replace(':ruc', ruc);
+            
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (response) {
+                    var datosNull = response.list.multiRef['cod_dep']['@nil'];
+
+                    if (datosNull) {
+                        Swal.fire({
+                        icon: 'error',
+                        title:'Oops...',
+                        text: 'Datos no encontrados',
+                        })
+                        /* Swal.fire({
+                            icon: 'success',
+                            title: 'Datos encontrados!',
+                            text: 'RUC encontrado!',
+                            footer: '<a href>Why do I have this issue?</a>'
+                        }) */
+
+                    }else{
+                        /* alert('Datos Encontrados'); */
+                        responseDatosSunat = response.list.multiRef;
+
+                        /* console.log(responseDatosSunat);
+                        console.log(responseDatosSunat["ddp_nombre"]["$"]); */
+
+                        $("#apeNombre").val(responseDatosSunat["ddp_nombre"]["$"]);
+                        Swal.fire(
+                        'Exito!',
+                        'Datos encontrados',
+                        'success')
+                        /*
+                        $("#ruc").val('');
+                        $("#razonSocial").val('');
+                        $("#direccion").val('');
+                        $("#estado").val('');
+                        $("#estable").val('');
+                        $("#giroEstable").val('');
+                        $("#repLegal").val(''); */
+                        return false;
+                    }
+
+                    /* console.log(response.list.multiRef); */
+                    
+                    /* $("#razonSocial").val(element.razonSocial);
+                    $("#direccion").val(element.direccion);
+                    $("#estado").val(element.estado);
+                    $("#estable").val(element.estable);
+                    $("#giroEstable").val(element.giroEstable); */
+                    
                     
                 }
             });
+        });
+</script>
 
-            $("#clear").on('click', function(){
-               
-                /* $("#estable").empty(); */
-                $("#estable").val(''); 
-                $("#giroEstable").val('<?php echo $giro->nombre; ?>').first();            
-            });
-
-            $("#getSunatDatos").on("click", function(){
-                var ruc = $("#ruc").val();
-                var url = "{{ route('getSunatDatos', ':ruc') }}";                
-                url = url.replace(':ruc', ruc);
-               
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    dataType: "json",
-                    success: function (response) {
-                        // console.log(response.list.multiRef['cod_dep']['@nil']);
-
-                        var datosNull = response.list.multiRef['cod_dep']['@nil'];
-
-                        if (datosNull) {
-                           alert('Datos no encontrados');
-                            /* Swal.fire({
-                                icon: 'success',
-                                title: 'Datos encontrados!',
-                                text: 'RUC encontrado!',
-                                footer: '<a href>Why do I have this issue?</a>'
-                            }) */
-                            
-                        }else{
-                            alert('Datos Encontrados');
-                            responseDatosSunat = response.list.multiRef;
-
-                            console.log(responseDatosSunat);
-                            console.log(responseDatosSunat["ddp_nombre"]["$"]);
-
-                            $("#repLegal").val(responseDatosSunat["ddp_nombre"]["$"]);
-                            /* Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'RUC no encontrado!',
-                                footer: '<a href>Why do I have this issue?</a>'
-                            })
-                            $("#ruc").val('');
-                            $("#razonSocial").val('');
-                            $("#direccion").val('');
-                            $("#estado").val('');
-                            $("#estable").val('');
-                            $("#giroEstable").val('');
-                            $("#repLegal").val(''); */
-                            return false;
-                        }
-
-                        /* console.log(response.list.multiRef); */
-                        
-                           
-                        /* $("#razonSocial").val(element.razonSocial);
-                        $("#direccion").val(element.direccion);
-                        $("#estado").val(element.estado);
-                        $("#estable").val(element.estable);
-                        $("#giroEstable").val(element.giroEstable); */
-                        
-                       
-                    }
-                });
-            });
-    </script>
-    @stop
+<script>
+function validar(){
+	
+	//Almacenamos los valores
+	nombre=$('#dni').val();
+	
+   //Comprobamos la longitud de caracteres
+	if (nombre.length>8){
+		return true;
+	}
+	else {
+		alert('Minimo 8 caracteres');
+		return false;
+	}
+}
+</script>
+@stop

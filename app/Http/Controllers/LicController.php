@@ -76,12 +76,7 @@ class LicController extends Controller
 
         return redirect('/home');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         /* $respuesta = $request->except('_token'); */
