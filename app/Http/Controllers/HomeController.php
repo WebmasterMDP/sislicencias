@@ -21,8 +21,8 @@ class HomeController extends Controller
 
         $countDisponibles  = $dispo->count();
         $countAnulados     = $anul->count();
-        $countImprimidos   = $impri->count();
-        $countNoImprimidos = $noImpri->count();
+        $countImpresos   = $impri->count();
+        $countNoImpresos = $noImpri->count();
 
         $disponibles  = $dispo->get();
         $anulados     = $anul->get();
@@ -30,7 +30,7 @@ class HomeController extends Controller
         $noImprimidos = $noImpri->get();
 
         return view('home', compact('disponibles', 'anulados', 'imprimidos', 'noImprimidos', 'countAnulados', 
-                                    'countDisponibles', 'countImprimidos', 'countNoImprimidos'));
+                                    'countDisponibles', 'countImpresos', 'countNoImpresos'));
     }
 
     public function reg_usuario()

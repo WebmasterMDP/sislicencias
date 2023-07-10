@@ -31,10 +31,6 @@ $(function () {
      },
      "with-buttons": true,
      "buttons":
-      [ { "extend": "excel", "text": '<i class="far fa-file-excel"></i> Excel', "titleAttr": "Exportar Excel", "className": "btn-success"  } ],
- })
+      [ { "extend": "excel", "text": '<i class="far fa-file-excel"></i> Excel', "titleAttr": "Exportar Excel", "className": "btn-success mt-1" }/* , { "extend": "", "text": '<i class="far fa-plus-square"></i> Agregar', "titleAttr": "Agregar", "className": "btn-info m-1" } */ ],
+  })
  });
-
-
-
-

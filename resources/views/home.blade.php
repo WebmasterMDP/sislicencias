@@ -24,8 +24,8 @@
                                                 <div class="col-lg-3 col-6">
                                                     <div class="small-box bg-info">
                                                         <div class="inner">
-                                                            <h3>{{ $countNoImprimidos }}</h3>
-                                                            <p>No Imprimidos</p>
+                                                            <h3>{{ $countNoImpresos }}</h3>
+                                                            <p>No Impresos</p>
                                                         </div>
                                                         <div class="icon">
                                                             <i class="ion ion-bag"></i>
@@ -55,8 +55,8 @@
 
                                                     <div class="small-box bg-warning">
                                                         <div class="inner">
-                                                            <h3>{{ $countImprimidos }}</h3>
-                                                            <p>Imprimidos</p>
+                                                            <h3>{{ $countImpresos }}</h3>
+                                                            <p>Impresos</p>
                                                         </div>
                                                         <div class="icon">
                                                             <i class="ion ion-person-add"></i>

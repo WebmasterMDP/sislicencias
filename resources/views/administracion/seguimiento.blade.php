@@ -43,9 +43,9 @@
                                             <td><span class="badge bg-danger">Anulado</span></td>
                                             @endif
                                             @if( $dato->print == 1)
-                                            <td><span class="badge bg-secondary">Imprimido</span></td>
+                                            <td><span class="badge bg-secondary">Impreso</span></td>
                                             @else
-                                            <td><span class="badge bg-info">Sin Imprimir</span></td>
+                                            <td><span class="badge bg-info">No Impreso</span></td>
                                             @endif
                                             <td>{{ $dato->observacion }}</td>
                                             <td>{{ $dato->usuario }}</td>
